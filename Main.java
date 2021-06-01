@@ -1,10 +1,13 @@
 
 public class Main {
 
-    static Tree AVL_TREE = new Tree();                                      //Instancia uma nova árvore ao executar o programa
+    static Tree CPF_TREE = new Tree();   
+    static Tree NOME_TREE = new Tree(); 
+    static Tree DATANASC_TREE = new Tree();
+    
     public static void main(String[] args) {
         //Menu.menu();
-        File_Importer.CSV_reader();
+        File_Importer.CSV_reader(); //TODO: remover esse teste
 
     }
 }
