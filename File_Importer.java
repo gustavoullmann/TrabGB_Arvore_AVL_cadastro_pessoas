@@ -9,7 +9,7 @@ public class File_Importer {
 
     public static void CSV_reader() {
 
-        String file = "cadastro_pessoas.csv";
+        String file = "cadastro_pessoas_reverse.csv";
         BufferedReader reader = null;
         String line = "";
 
@@ -33,7 +33,12 @@ public class File_Importer {
                     totalImported--;
                 }
                 else {
-                    Person p = new Person(cpf, rg, row[2], dataNasc, row[4]);
+                    Person pessoa = new Person(cpf, rg, row[2], dataNasc, row[4]);
+
+                    Main.CPF_TREE.insertNode(cpf, pessoa);
+                    Main.NOME_TREE.insertNode(row[2], pessoa);
+                    Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
+
                     //p.printInformations(); //TODO: remover esse teste
                     //System.out.println(); //TODO: remover esse teste
                 }   
