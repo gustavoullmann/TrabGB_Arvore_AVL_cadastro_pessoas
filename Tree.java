@@ -1,51 +1,51 @@
-public class Tree {
+public class Tree <T extends Comparable<T>>{
 
-    private Nodo root;
+    private Nodo <T> root;
 
     public Tree() {
-        this.root = new Nodo();                             //TODO: revisar se é uma boa prática chamar um construtor dentro de outro
+        this.root = new Nodo<T>();
     }
 
-    public Nodo getRoot() {
+    public Nodo <T> getRoot() {
         return root;
     }
 
-    public void setRoot(Nodo node) {
+    public void setRoot(Nodo <T> node) {
         root = node;
     }
 
-    public Nodo findMinNode(Nodo root) {
+    public Nodo <T> findMinNode(Nodo <T> root) {
         
-        Nodo minNode = root;
+        Nodo <T> minNode = root;
 
-        while(minNode.getLeftSon().getData() != null) {
+        while(minNode.getLeftSon().getKey() != null) {
             minNode = minNode.getLeftSon();
         }
         return minNode;        
     }
 
-    public Nodo findMaxNode(Nodo root) {
+    public Nodo <T> findMaxNode(Nodo <T> root) {
 
-        Nodo maxNode = root;
+        Nodo <T> maxNode = root;
 
-        while(maxNode.getRightSon().getData() != null) {
+        while(maxNode.getRightSon().getKey() != null) {
             maxNode = maxNode.getRightSon();
         }
         return maxNode;
     }
 
-    public Nodo insertNode(Integer data) {                  
+    public Nodo <T> insertNode(T key) {                  
 
-        Nodo node = searchNode(data);
+        Nodo <T> node = searchNode(key);
 
-        if(node.getData() == data) {
-            System.out.println("\n" + "ATENÇÃO: o valor '" + data + "' já está existe na árvore!");
+        if(node.getKey() == key) {
+            System.out.println("\n" + "ATENÇÃO: o valor '" + key + "' já está existe na árvore!");
         }
         else {
-            node.setData(data);
+            node.setKey(key);
 
-            Nodo leftSonNode = new Nodo();
-            Nodo rightSonNode = new Nodo();
+            Nodo <T> leftSonNode = new Nodo <T> ();
+            Nodo <T> rightSonNode = new Nodo <T> ();
     
             node.setLeftSon(leftSonNode);
             node.setRightSon(rightSonNode);
@@ -63,14 +63,14 @@ public class Tree {
         return node;
     }
 
-    public void removeNode (Integer data) {                 
+    public void removeNode (T key) {                 
 
-        Nodo node = searchNode(data);
-        Nodo nodeParent = node.getParent();
+        Nodo <T> node = searchNode(key);
+        Nodo <T> nodeParent = node.getParent();
         Boolean isRootNode = (root == node);
 
-        if(node.getData() == null) {
-            System.out.println("\n" + "ATENÇÃO: o valor '" + data + "' não existe na árvore!");
+        if(node.getKey() == null) {
+            System.out.println("\n" + "ATENÇÃO: o valor '" + key + "' não existe na árvore!");
         }
         else if(isRootNode){
             removeRootNode(node);           
@@ -82,17 +82,17 @@ public class Tree {
         
     }
 
-    public void removeRootNode(Nodo node) {
-        Nodo parent = node.getParent();
-        Nodo rightSon = node.getRightSon();
-        Nodo leftSon = node.getLeftSon();
-        Integer rightSonData = node.getRightSon().getData();
-        Integer leftSonData = node.getLeftSon().getData();
+    public void removeRootNode(Nodo <T> node) {
+        Nodo <T> parent = node.getParent();
+        Nodo <T> rightSon = node.getRightSon();
+        Nodo <T> leftSon = node.getLeftSon();
+        T rightSonKey = node.getRightSon().getKey();
+        T leftSonKey = node.getLeftSon().getKey();
 
-        if(rightSonData == null && leftSonData == null) {               //nó folha que é root: cria nova árvore vazia
-            node.setData(null);
+        if(rightSonKey == null && leftSonKey == null) {               //nó folha que é root: cria nova árvore vazia
+            node.setKey(null);
         }
-        else if(rightSonData == null && leftSonData != null) {          //filhos a esquerda               
+        else if(rightSonKey == null && leftSonKey != null) {          //filhos a esquerda               
             leftSon.setParent(parent);
             root = leftSon;
             
@@ -101,7 +101,7 @@ public class Tree {
             updateHeigh(root);
             updateBalanceFactor(root);
         }
-        else if(rightSonData != null && leftSonData == null) {          //filhos a direita
+        else if(rightSonKey != null && leftSonKey == null) {          //filhos a direita
             rightSon.setParent(parent);
             root = rightSon;
            
@@ -111,7 +111,7 @@ public class Tree {
             updateBalanceFactor(root);
         }
         else {                                                          //filhos a esquerda e direita
-            Nodo maxNode = findMaxNode(leftSon);
+            Nodo <T> maxNode = findMaxNode(leftSon);
 
             if(leftSon == maxNode) {
                 maxNode.setParent(parent);
@@ -141,15 +141,15 @@ public class Tree {
             }
         }
 
-    public void removeNonRootNode(Nodo node) {
-        Nodo parent = node.getParent();
-        Nodo rightSon = node.getRightSon();
-        Nodo leftSon = node.getLeftSon();
-        Integer rightSonData = node.getRightSon().getData();
-        Integer leftSonData = node.getLeftSon().getData();
+    public void removeNonRootNode(Nodo <T> node) {
+        Nodo <T> parent = node.getParent();
+        Nodo <T> rightSon = node.getRightSon();
+        Nodo <T> leftSon = node.getLeftSon();
+        T rightSonKey = node.getRightSon().getKey();
+        T leftSonKey = node.getLeftSon().getKey();
 
-        if(rightSonData == null && leftSonData == null) {               //nó folha
-            if(node.getData() > parent.getData()) {
+        if(rightSonKey == null && leftSonKey == null) {               //nó folha
+            if(node.getKey().compareTo(parent.getKey()) > 0) {
                 parent.setRightSon(rightSon);
                 rightSon.setParent(parent);
             } 
@@ -163,8 +163,8 @@ public class Tree {
             updateHeigh(root);
             updateBalanceFactor(root);
         }             
-        else if(rightSonData == null && leftSonData != null) {          //filhos a esquerda               
-            if(leftSonData > parent.getData()) {
+        else if(rightSonKey == null && leftSonKey != null) {          //filhos a esquerda               
+            if(leftSonKey.compareTo(parent.getKey()) > 0) {
                 parent.setRightSon(leftSon);
             } 
             else {
@@ -177,8 +177,8 @@ public class Tree {
             updateHeigh(root);
             updateBalanceFactor(root);
         }       
-        else if(rightSonData != null && leftSonData == null) {          //filhos a direita
-            if(rightSonData > parent.getData()){
+        else if(rightSonKey != null && leftSonKey == null) {          //filhos a direita
+            if(rightSonKey.compareTo(parent.getKey()) > 0){
                 parent.setRightSon(rightSon);
             } else {
                 parent.setLeftSon(rightSon);
@@ -191,16 +191,16 @@ public class Tree {
             updateBalanceFactor(root);
         }
         else {                                                          //filhos a esquerda e direita
-            Nodo maxNode = findMaxNode(leftSon);
-            Nodo maxNodeParent = maxNode.getParent();
-            Nodo maxNodeRightSon = maxNode.getRightSon();
+            Nodo <T> maxNode = findMaxNode(leftSon);
+            Nodo <T> maxNodeParent = maxNode.getParent();
+            Nodo <T> maxNodeRightSon = maxNode.getRightSon();
 
             if(leftSon == maxNode) {
                 maxNode.setParent(node.getParent());
                 maxNode.setRightSon(rightSon);
                 maxNode.getRightSon().setParent(maxNode);
 
-                if(maxNode.getData() > parent.getData()){
+                if(maxNode.getKey().compareTo(parent.getKey()) > 0){
                     parent.setRightSon(maxNode);
                 } else {
                     parent.setLeftSon(maxNode);
@@ -210,7 +210,7 @@ public class Tree {
                 maxNodeRightSon.setParent(maxNodeParent);
                 maxNodeParent.setRightSon(maxNodeRightSon);
 
-                if(maxNode.getData() > parent.getData()){
+                if(maxNode.getKey().compareTo(parent.getKey()) > 0){
                     parent.setRightSon(maxNode);
                 } else {
                     parent.setLeftSon(maxNode);
@@ -234,28 +234,28 @@ public class Tree {
         }                                                                 
     }
 
-    public Nodo searchNode(Integer data) {
+    public Nodo <T> searchNode(T key) {
 
-        Nodo currentNode = root; 
-        Integer currentNodeData = currentNode.getData();
+        Nodo <T> currentNode = root; 
+        T currentNodeKey = currentNode.getKey();
 
-        while(currentNodeData != data && currentNodeData != null) {
+        while(currentNodeKey != key && currentNodeKey != null) {
 
-            if(data < currentNodeData) {
+            if(key.compareTo(currentNodeKey) < 0) {
                 currentNode = currentNode.getLeftSon();
-                currentNodeData = currentNode.getData();
+                currentNodeKey = currentNode.getKey();
             }
             else {
                 currentNode = currentNode.getRightSon();
-                currentNodeData = currentNode.getData();
+                currentNodeKey = currentNode.getKey();
             }
         }
         return currentNode;        
     }
 
-    public void updateHeigh(Nodo rootNode) {                        
+    public void updateHeigh(Nodo <T> rootNode) {                        
 
-        if(rootNode.getData() == null) {
+        if(rootNode.getKey() == null) {
             rootNode.setNodeHeight(-1);
         }
         else {
@@ -266,9 +266,9 @@ public class Tree {
         }
     }
 
-    public void updateBalanceFactor(Nodo rootNode) {                
+    public void updateBalanceFactor(Nodo <T> rootNode) {                
        
-        if(rootNode.getData() == null) {
+        if(rootNode.getKey() == null) {
             rootNode.setBalanceFactor(0);
         }
         else {
@@ -279,13 +279,13 @@ public class Tree {
         }
     }
 
-    public Nodo checkTreeUnbalanceFromLeaf(Nodo leaf) {
+    public Nodo <T> checkTreeUnbalanceFromLeaf(Nodo <T> leaf) {
 
-        Nodo unbalancedNode = null;
+        Nodo <T> unbalancedNode = null;
 
         if(leaf != null) {
-            Nodo currentNode = leaf;
-            Nodo parent = currentNode.getParent();
+            Nodo <T> currentNode = leaf;
+            Nodo <T> parent = currentNode.getParent();
             int balanceFactor = currentNode.getBalanceFactor();
     
             if(balanceFactor < -1 || balanceFactor > 1) {
@@ -304,7 +304,7 @@ public class Tree {
         return unbalancedNode;
     }
 
-    public void rebalanceNode(Nodo unbalancedNode) {
+    public void rebalanceNode(Nodo <T> unbalancedNode) {
 
         int bf = unbalancedNode.getBalanceFactor();
         int leftSonBf = unbalancedNode.getLeftSon().getBalanceFactor();
@@ -324,11 +324,11 @@ public class Tree {
         }
     }
 
-    public void rightRotation(Nodo unbalancedNode) {
+    public void rightRotation(Nodo <T> unbalancedNode) {
 
-        Nodo unbalancedNodeParent = unbalancedNode.getParent();
-        Nodo unbalancedNodeLeftSon = unbalancedNode.getLeftSon();
-        Nodo unbalancedNodeLeftSonsRightSon = unbalancedNodeLeftSon.getRightSon();
+        Nodo <T> unbalancedNodeParent = unbalancedNode.getParent();
+        Nodo <T> unbalancedNodeLeftSon = unbalancedNode.getLeftSon();
+        Nodo <T> unbalancedNodeLeftSonsRightSon = unbalancedNodeLeftSon.getRightSon();
 
         unbalancedNode.setLeftSon(unbalancedNodeLeftSonsRightSon);
         unbalancedNodeLeftSonsRightSon.setParent(unbalancedNode);
@@ -342,7 +342,7 @@ public class Tree {
         }
         else {
             unbalancedNodeLeftSon.setParent(unbalancedNodeParent);
-            if(unbalancedNodeParent.getData() > unbalancedNodeLeftSon.getData()) {
+            if(unbalancedNodeParent.getKey().compareTo(unbalancedNodeLeftSon.getKey()) > 0) {
                 unbalancedNodeParent.setLeftSon(unbalancedNodeLeftSon);
             }
             else {
@@ -353,11 +353,11 @@ public class Tree {
         updateBalanceFactor(root);
     }
 
-    public void leftRotation(Nodo unbalancedNode) {
+    public void leftRotation(Nodo <T> unbalancedNode) {
 
-        Nodo unbalancedNodeParent = unbalancedNode.getParent();
-        Nodo unbalancedNodeRightSon = unbalancedNode.getRightSon();
-        Nodo unbalancedNodeRightSonsLeftSon = unbalancedNodeRightSon.getLeftSon();
+        Nodo <T> unbalancedNodeParent = unbalancedNode.getParent();
+        Nodo <T> unbalancedNodeRightSon = unbalancedNode.getRightSon();
+        Nodo <T> unbalancedNodeRightSonsLeftSon = unbalancedNodeRightSon.getLeftSon();
 
         unbalancedNode.setRightSon(unbalancedNodeRightSonsLeftSon);
         unbalancedNodeRightSonsLeftSon.setParent(unbalancedNode);
@@ -371,7 +371,7 @@ public class Tree {
         }
         else {
             unbalancedNodeRightSon.setParent(unbalancedNodeParent);
-            if(unbalancedNodeParent.getData() > unbalancedNodeRightSon.getData()) {
+            if(unbalancedNodeParent.getKey().compareTo(unbalancedNodeRightSon.getKey()) > 0) {
                 unbalancedNodeParent.setLeftSon(unbalancedNodeRightSon);
             }
             else {
@@ -382,23 +382,23 @@ public class Tree {
         updateBalanceFactor(root);
     }
 
-    public void leftRightRotation(Nodo unbalancedNode) {
+    public void leftRightRotation(Nodo <T> unbalancedNode) {
 
-        Nodo unbalancedNodeLeftSon = unbalancedNode.getLeftSon();
+        Nodo <T> unbalancedNodeLeftSon = unbalancedNode.getLeftSon();
 
         leftRotation(unbalancedNodeLeftSon);
         rightRotation(unbalancedNode);                                   
     }
 
-    public void rightLeftRotation(Nodo unbalancedNode) { 
+    public void rightLeftRotation(Nodo <T> unbalancedNode) { 
 
-        Nodo unbalancedNodeRightSon = unbalancedNode.getRightSon();
+        Nodo <T> unbalancedNodeRightSon = unbalancedNode.getRightSon();
        
         rightRotation(unbalancedNodeRightSon);
         leftRotation(unbalancedNode);                                       
     }
 
-    public void printTree(Nodo rootNode, int level) {
+    public void printTree(Nodo <T> rootNode, int level) {
 
         int tabulationRepetition = level;
         String tabulation = "\t".repeat(tabulationRepetition);
@@ -407,10 +407,10 @@ public class Tree {
             System.out.println(tabulation + "*");
         } 
         else {
-            String nodeData = String.valueOf(rootNode.getData());
+            String nodeKey = String.valueOf(rootNode.getKey());
             String nodeStatistics = "[" + rootNode.balanceFactorLabel(rootNode) + "]"; 
 
-            System.out.println(tabulation + nodeData + nodeStatistics);
+            System.out.println(tabulation + nodeKey + nodeStatistics);
             tabulationRepetition++;
 
             printTree(rootNode.getRightSon(), tabulationRepetition);
@@ -429,56 +429,56 @@ public class Tree {
         return header;
     }
 
-    public void printSearchNodePath (Integer data) {
+    public void printSearchNodePath (T key) {
 
-        Nodo currentNode = root; 
-        Integer currentNodeData = currentNode.getData();
+        Nodo <T> currentNode = root; 
+        T currentNodeKey = currentNode.getKey();
         String nodePath = "\n" + "Relação de nós visitados: ";
 
-        while(currentNodeData != data && currentNodeData != null) {
+        while(currentNodeKey != key && currentNodeKey != null) {
 
-            if(data < currentNodeData) {
-                nodePath += currentNodeData + " ";
+            if(key.compareTo(currentNodeKey) < 0) {
+                nodePath += currentNodeKey + " ";
                 currentNode = currentNode.getLeftSon();
-                currentNodeData = currentNode.getData();
+                currentNodeKey = currentNode.getKey();
             }
             else {
-                nodePath += currentNodeData + " ";
+                nodePath += currentNodeKey + " ";
                 currentNode = currentNode.getRightSon();
-                currentNodeData = currentNode.getData();
+                currentNodeKey = currentNode.getKey();
             }
         }
         System.out.println("\033[32m" + nodePath + "\033[0m");
     }
 
-    public void preOrderTraversal(Nodo node) {
+    public void preOrderTraversal(Nodo <T> node) {
         
-        if(node.getData() != null) {
-            System.out.print("\033[32m" + node.getData() + "\033[0m" + "\t");
+        if(node.getKey() != null) {
+            System.out.print("\033[32m" + node.getKey() + "\033[0m" + "\t");
 
             preOrderTraversal(node.getLeftSon());
             preOrderTraversal(node.getRightSon());
         }
     }
 
-    public void inOrderTraversal(Nodo node) {
+    public void inOrderTraversal(Nodo <T> node) {
 
-        if(node.getData() != null) {
+        if(node.getKey() != null) {
             inOrderTraversal(node.getLeftSon());
 
-            System.out.print("\033[32m" + node.getData() + "\033[0m" + "\t");
+            System.out.print("\033[32m" + node.getKey() + "\033[0m" + "\t");
 
             inOrderTraversal(node.getRightSon());
         }
     }
 
-    public void postOrderTraversal(Nodo node) {
+    public void postOrderTraversal(Nodo <T> node) {
 
-        if(node.getData() != null) {
+        if(node.getKey() != null) {
             postOrderTraversal(node.getLeftSon());
             postOrderTraversal(node.getRightSon());
 
-            System.out.print("\033[32m" + node.getData() + "\033[0m" + "\t");
+            System.out.print("\033[32m" + node.getKey() + "\033[0m" + "\t");
         }
     }
  }
