@@ -1,15 +1,17 @@
 
-public class Nodo {
+public class Nodo <T> {
 
-    private Integer data;
-    private Nodo parent;
-    private Nodo rightSon;
-    private Nodo leftSon;
+    private T key;
+	private Person pessoa;
+    private Nodo <T> parent;
+    private Nodo <T> rightSon;
+    private Nodo <T> leftSon;
     private int nodeHeight;
     private int balanceFactor;
 
-    public Nodo(Integer data) {
-        this.data = data;
+    public Nodo(T key, Person pessoa) {
+        this.key = key;
+		this.pessoa = pessoa;
         this.parent = null;
         this.rightSon = null;
         this.leftSon = null;
@@ -18,7 +20,8 @@ public class Nodo {
     }
 
     public Nodo() {       			    //construtor vazio para montar filhos vazios de nó folha; 
-		this.data = null;
+		this.key = null;
+		this.pessoa = null;
         this.parent = null;
         this.rightSon = null;
         this.leftSon = null;
@@ -26,35 +29,43 @@ public class Nodo {
         this.balanceFactor = 0;
 	}
 
-    public Integer getData() {
-		return data;
+    public T getKey() {
+		return key;
 	}
 
-	public void setData(Integer data) {
-		this.data = data;
+	public void setKey(T key) {
+		this.key = key;
 	}
 
-	public Nodo getParent() {
+	public Person getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Person pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public Nodo <T> getParent() {
 		return parent;
 	}
 
-	public void setParent(Nodo parent) {
+	public void setParent(Nodo <T> parent) {
 		this.parent = parent;
 	}
 
-	public Nodo getRightSon() {
+	public Nodo <T> getRightSon() {
 		return rightSon;
 	}
 
-	public void setRightSon(Nodo rightSon) {
+	public void setRightSon(Nodo <T> rightSon) {
 		this.rightSon = rightSon;
 	}
 
-	public Nodo getLeftSon() {
+	public Nodo <T> getLeftSon() {
 		return leftSon;
 	}
 
-	public void setLeftSon(Nodo leftSon) {
+	public void setLeftSon(Nodo <T> leftSon) {
 		this.leftSon = leftSon;
 	}
 
@@ -74,9 +85,9 @@ public class Nodo {
 		this.balanceFactor = balanceFactor;
 	}
 
-	public static void calculateBalanceFactor(Nodo node) {               
+	public static <T> void calculateBalanceFactor(Nodo <T> node) {               
 
-		if(node.getData() != null) {
+		if(node.getKey() != null) {
 			int heightLeftSon = node.getLeftSon().getNodeHeight();
 			int heightRightSon = node.getRightSon().getNodeHeight();
 
@@ -84,9 +95,9 @@ public class Nodo {
 		}
 	}
 
-	public static void calculateNodeHeight(Nodo node) {					
+	public static <T> void calculateNodeHeight(Nodo <T> node) {					
 
-		if(node.getData() != null) {
+		if(node.getKey() != null) {
 			int heightLeftSon = node.getLeftSon().getNodeHeight();
 			int heightRightSon = node.getRightSon().getNodeHeight();
 
@@ -96,7 +107,7 @@ public class Nodo {
 		}
 	}
 
-	public String balanceFactorLabel(Nodo node) {
+	public String balanceFactorLabel(Nodo <T> node) {
 
 		String label = "";
 		int balanceFactor = node.getBalanceFactor();
@@ -112,8 +123,8 @@ public class Nodo {
 	
 	public String printNodeAttributes() {							//Não fizemos override de toString: gerava erro recursivo e "consumia" o método que imprime o endereço de memória do objeto
 		return 	"\033[32m" +
-				"This Node: " + toString() + "\n" +
-				"Data: " + data + "\n" +
+				"Key: " + key + "\n" +
+				"Pessoa: " + pessoa + "\n" +
 				"Parent: " + parent + "\n" +
 				"Right Son: " + rightSon + "\n" +
 				"Left Son: " + leftSon + "\n" +
