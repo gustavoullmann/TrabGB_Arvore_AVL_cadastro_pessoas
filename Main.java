@@ -10,5 +10,11 @@ public class Main {
         //Menu.menu();
         File_Importer.CSV_reader(); //TODO: remover esse teste
 
+        CPF_TREE.inOrderTraversal(CPF_TREE.getRoot());
+        System.out.println();
+        NOME_TREE.inOrderTraversal(NOME_TREE.getRoot());
+        System.out.println();
+        DATANASC_TREE.inOrderTraversal(DATANASC_TREE.getRoot());
+
     }
 }
