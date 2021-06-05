@@ -34,7 +34,7 @@ public class Tree <T extends Comparable<T>>{
         return maxNode;
     }
 
-    public Nodo <T> insertNode(T key) {                  
+    public Nodo <T> insertNode(T key, Person pessoa) {                  
 
         Nodo <T> node = searchNode(key);
 
@@ -43,6 +43,7 @@ public class Tree <T extends Comparable<T>>{
         }
         else {
             node.setKey(key);
+            node.setPessoa(pessoa);
 
             Nodo <T> leftSonNode = new Nodo <T> ();
             Nodo <T> rightSonNode = new Nodo <T> ();
