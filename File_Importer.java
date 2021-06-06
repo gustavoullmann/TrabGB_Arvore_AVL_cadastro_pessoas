@@ -9,7 +9,7 @@ public class File_Importer {
 
     public static void CSV_reader() {
 
-        String file = "cadastro_pessoas_reverse.csv";
+        String file = "cadastro_pessoas_random.csv";
         BufferedReader reader = null;
         String line = "";
 
@@ -34,13 +34,17 @@ public class File_Importer {
                 }
                 else {
                     Person pessoa = new Person(cpf, rg, row[2], dataNasc, row[4]);
-
-                    Main.CPF_TREE.insertNode(cpf, pessoa);
-                    Main.NOME_TREE.insertNode(row[2], pessoa);
-                    Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
-
-                    //p.printInformations(); //TODO: remover esse teste
-                    //System.out.println(); //TODO: remover esse teste
+                    boolean duplicatedCpf = checkDuplicatedCpf(cpf);
+                    
+                    if(duplicatedCpf) {
+                        totalImported--;
+                        System.out.println("\033[31m" + "CPF duplicado na linha " + currentLine + "! Registro não importado!" + "\033[0m");
+                    } 
+                    else {
+                        Main.CPF_TREE.insertNode(cpf, pessoa);
+                        Main.NOME_TREE.insertNode(row[2], pessoa);
+                        Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
+                    }
                 }   
             }
         } 
@@ -55,6 +59,17 @@ public class File_Importer {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static boolean checkDuplicatedCpf(Long cpf) {
+        
+        boolean duplicatedCpf = false;
+        Nodo <Long> node = Main.CPF_TREE.searchNode(cpf);
+
+        if(node.getKey() != null && node.getKey().compareTo(cpf) == 0) {
+            duplicatedCpf = true;
+        }
+        return duplicatedCpf;
     }
 
     public static Long readCPF(String[] row, int line) {
