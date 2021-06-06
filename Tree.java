@@ -240,7 +240,7 @@ public class Tree <T extends Comparable<T>>{
         Nodo <T> currentNode = root; 
         T currentNodeKey = currentNode.getKey();
 
-        while(currentNodeKey != key && currentNodeKey != null) {
+        while(currentNodeKey != null && currentNodeKey.compareTo(key) != 0) {
 
             if(key.compareTo(currentNodeKey) < 0) {
                 currentNode = currentNode.getLeftSon();
