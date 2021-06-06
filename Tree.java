@@ -38,7 +38,7 @@ public class Tree <T extends Comparable<T>>{
 
         Nodo <T> node = searchNode(key);
 
-        if(node.getKey() == key) {
+        if(node.getKey() != null && node.getKey().compareTo(key) == 0) {
             System.out.println("\n" + "ATENÇÃO: o valor '" + key + "' já está existe na árvore!");
         }
         else {
