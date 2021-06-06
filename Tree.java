@@ -38,29 +38,24 @@ public class Tree <T extends Comparable<T>>{
 
         Nodo <T> node = searchNode(key);
 
-        if(node.getKey() != null && node.getKey().compareTo(key) == 0) {
-            System.out.println("\n" + "ATENÇÃO: o valor '" + key + "' já está existe na árvore!");
-        }
-        else {
-            node.setKey(key);
-            node.setPessoa(pessoa);
+        node.setKey(key);
+        node.setPessoa(pessoa);
 
-            Nodo <T> leftSonNode = new Nodo <T> ();
-            Nodo <T> rightSonNode = new Nodo <T> ();
-    
-            node.setLeftSon(leftSonNode);
-            node.setRightSon(rightSonNode);
-    
-            leftSonNode.setParent(node);
-            rightSonNode.setParent(node);
-    
-            Nodo.calculateBalanceFactor(node);
-            Nodo.calculateNodeHeight(node);
+        Nodo <T> leftSonNode = new Nodo <T> ();
+        Nodo <T> rightSonNode = new Nodo <T> ();
 
-            updateHeigh(root);
-            updateBalanceFactor(root);
+        node.setLeftSon(leftSonNode);
+        node.setRightSon(rightSonNode);
+
+        leftSonNode.setParent(node);
+        rightSonNode.setParent(node);
+
+        Nodo.calculateBalanceFactor(node);
+        Nodo.calculateNodeHeight(node);
+
+        updateHeigh(root);
+        updateBalanceFactor(root);
         
-        }
         return node;
     }
 
