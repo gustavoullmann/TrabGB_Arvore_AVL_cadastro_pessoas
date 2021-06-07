@@ -9,7 +9,7 @@ public class File_Importer {
 
     public static void CSV_reader() {
 
-        String file = "cadastro_pessoas_random.csv";
+        String file = "cadastro_pessoas.csv";
         BufferedReader reader = null;
         String line = "";
 
@@ -41,9 +41,14 @@ public class File_Importer {
                         System.out.println("\033[31m" + "CPF duplicado na linha " + currentLine + "! Registro não importado!" + "\033[0m");
                     } 
                     else {
-                        Main.CPF_TREE.insertNode(cpf, pessoa);
-                        Main.NOME_TREE.insertNode(row[2], pessoa);
-                        Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
+                        Nodo <Long> newNodeCpf = Main.CPF_TREE.insertNode(cpf, pessoa);
+                        Main.CPF_TREE.checkTreeUnbalanceFromLeaf(newNodeCpf);
+                        
+                        Nodo <String> newNodeNome = Main.NOME_TREE.insertNode(row[2], pessoa);
+                        Main.NOME_TREE.checkTreeUnbalanceFromLeaf(newNodeNome);
+
+                        Nodo <Date> newNodeData = Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
+                        Main.DATANASC_TREE.checkTreeUnbalanceFromLeaf(newNodeData);
                     }
                 }   
             }
@@ -79,7 +84,7 @@ public class File_Importer {
         try {
             cpf = Long.valueOf(row[0]);
         } catch (NumberFormatException e) {
-            System.out.println("\033[31m" + "CPF inválido na linha " + line + "! Informe apenas números!" + "\033[0m");                    
+            System.out.println("\033[31m" + "CPF inválido na linha " + line + "! Informe apenas números! Registro não importado!" + "\033[0m");                    
         }
         return cpf;
     }
@@ -91,7 +96,7 @@ public class File_Importer {
         try {
             rg = Integer.valueOf(row[1]);
         } catch (NumberFormatException e) {
-            System.out.println("\033[31m" + "RG inválido na linha " + line + "! Informe apenas números!" + "\033[0m");                    
+            System.out.println("\033[31m" + "RG inválido na linha " + line + "! Informe apenas números! Registro não importado!" + "\033[0m");                    
         }
         return rg;
     }
@@ -104,7 +109,7 @@ public class File_Importer {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             dataNascimento = dateFormat.parse(row[3]);
         } catch (NumberFormatException | ParseException e) {
-            System.out.println("\033[31m" + "Data inválida na linha " + line + "! Informe em formato 'dd/mm/aaaa'!" + "\033[0m");                    
+            System.out.println("\033[31m" + "Data inválida na linha " + line + "! Informe em formato 'dd/mm/aaaa'! Registro não importado!" + "\033[0m");                    
         }
         return dataNascimento;
     }
