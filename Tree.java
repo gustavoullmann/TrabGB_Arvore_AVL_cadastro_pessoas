@@ -17,8 +17,9 @@ public class Tree <T extends Comparable<T>>{
     public Nodo <T> findMinNode(Nodo <T> root) {
         
         Nodo <T> minNode = root;
+        T minNodeKey = minNode.getLeftSon().getKey();
 
-        while(minNode.getLeftSon().getKey() != null) {
+        while(minNodeKey != null) {
             minNode = minNode.getLeftSon();
         }
         return minNode;        
@@ -27,8 +28,9 @@ public class Tree <T extends Comparable<T>>{
     public Nodo <T> findMaxNode(Nodo <T> root) {
 
         Nodo <T> maxNode = root;
+        T maxNodeKey = maxNode.getRightSon().getKey();
 
-        while(maxNode.getRightSon().getKey() != null) {
+        while(maxNodeKey != null) {
             maxNode = maxNode.getRightSon();
         }
         return maxNode;
@@ -249,9 +251,11 @@ public class Tree <T extends Comparable<T>>{
         return currentNode;        
     }
 
-    public void updateHeigh(Nodo <T> rootNode) {                        
+    public void updateHeigh(Nodo <T> rootNode) {
+        
+        T rootNodeKey = rootNode.getKey();
 
-        if(rootNode.getKey() == null) {
+        if(rootNodeKey == null) {
             rootNode.setNodeHeight(-1);
         }
         else {
@@ -264,7 +268,9 @@ public class Tree <T extends Comparable<T>>{
 
     public void updateBalanceFactor(Nodo <T> rootNode) {                
        
-        if(rootNode.getKey() == null) {
+        T rootNodeKey = rootNode.getKey();
+
+        if(rootNodeKey == null) {
             rootNode.setBalanceFactor(0);
         }
         else {
