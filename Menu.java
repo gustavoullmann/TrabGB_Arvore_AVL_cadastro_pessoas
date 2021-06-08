@@ -15,7 +15,6 @@ public class Menu {
         System.out.println("\t" + "'i' - Para inserir um nodo;");
         System.out.println("\t" + "'b' - Para buscar um nodo;");
         System.out.println("\t" + "'n' - Para buscar pela data de nascimento;");
-        System.out.println("\t" + "'r' - Para remover um nodo;");
         System.out.println("\t" + "'p' - Para imprimir a árvore em múltiplos percursos");
         System.out.println("\t" + "'s' - Para sair do programa");
 
@@ -115,27 +114,6 @@ public class Menu {
                     //LocalDate maxDate = readDataNasc(inputMaxDate);
 
 
-                    break;
-
-                case "r": 
-                    
-                    System.out.print("\n" + "\033[1;33m" + "Digite um valor inteiro positivo para remover da árvore: " + "\033[0m");
-                    
-                    try {
-                        int key = input.nextInt();
-                        Main.AVL_TREE.removeNode(key); 
-
-                        System.out.println();
-                        System.out.println(Main.AVL_TREE.printHeader());
-                        Main.AVL_TREE.printTree(Main.AVL_TREE.getRoot(), 0);
-        
-                        System.out.println("\n\t" + "\033[32m" + "ATENÇÃO: o nó '" + key + "' foi removido da árvore!" + "\033[0m");
-                        menu();
-                    } 
-                    catch (Exception InputMismatchException) {
-                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou uma tecla não numérica! Voltando para o Menu inicial..." + "\033[0m");
-                        menu();            
-                    }
                     break;
 
                 case "p":
