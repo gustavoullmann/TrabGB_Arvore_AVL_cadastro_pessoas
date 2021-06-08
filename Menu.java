@@ -8,8 +8,10 @@ public class Menu {
 
         System.out.println("\n" + "\033[1;33m" + "Escolha uma opção no menu abaixo:"  + "\n");
 
+        System.out.println("\t" + "'imp' - Para importar um arquivo CSV;");
         System.out.println("\t" + "'i' - Para inserir um nodo;");
         System.out.println("\t" + "'b' - Para buscar um nodo;");
+        System.out.println("\t" + "'n' - Para buscar pela data de nascimento;");
         System.out.println("\t" + "'r' - Para remover um nodo;");
         System.out.println("\t" + "'p' - Para imprimir a árvore em múltiplos percursos");
         System.out.println("\t" + "'s' - Para sair do programa");
@@ -20,6 +22,29 @@ public class Menu {
             String option = input.nextLine();
 
             switch(option.toLowerCase()) {
+
+                case "imp":
+
+                    try {
+                        System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: esta função está configurada para trabalhar com arquivos .CSV cujo separador é ';'." + 
+                        "\n\t" + "As colunas devem respeitar a seguinte ordem: " + 
+                        "\033[32m" + "CPF" + "\033[0m" + ";" + 
+                        "\033[32m" + "RG" + "\033[0m" + ";" + 
+                        "\033[32m" + "Nome" + "\033[0m" + ";" + 
+                        "\033[32m" + "DataNascimento" + "\033[0m" + ";"  + 
+                        "\033[32m" + "MunicípioNascimento" + "\033[0m" + "\n");
+                        
+                        System.out.print("\n" + "\033[1;33m" + "Informe o caminho (path) para o arquivo CSV: " + "\033[0m");
+
+                        String filePath = input.nextLine();
+                        File_Importer.CSV_reader(filePath);
+
+                        menu();
+                    }
+                    catch (Exception e) {
+                        menu();
+                    }
+                    break;
 
                 case "i":
             
@@ -32,8 +57,8 @@ public class Menu {
                             System.out.print("\n" + "\033[1;33m" + "Digite um valor inteiro para inserir na árvore: " + "\033[0m");
                         
                             int key = input.nextInt();
-                            Nodo newNode = Main.AVL_TREE.insertNode(key);
-                            Main.AVL_TREE.checkTreeUnbalanceFromLeaf(newNode);
+                            //Nodo newNode = Main.AVL_TREE.insertNode(key);
+                            //Main.AVL_TREE.checkTreeUnbalanceFromLeaf(newNode);
 
                             System.out.println();
                             System.out.println(Main.AVL_TREE.printHeader());
@@ -56,7 +81,7 @@ public class Menu {
                         Main.AVL_TREE.printSearchNodePath(key);
                         Nodo returnedNode = Main.AVL_TREE.searchNode(key);
 
-                        if(returnedNode.getData() == null) {
+                        if(returnedNode.getKey() == null) {
                             System.out.println("\n" + "\033[31m" + "ATENÇÃO: o valor digitado não foi encontrado na árvore!" + "\033[0m");
                             menu();
                         }
@@ -70,6 +95,17 @@ public class Menu {
                         System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou uma tecla não numérica! Voltando para o Menu inicial..." + "\033[0m");
                         menu();
                     }
+                    break;
+
+                case "n":
+                    
+                    System.out.println("\n" + "\033[1;33m" + "Escolha o tipo de busca:"  + "\n");
+
+                    System.out.println("\t" + "'e' - Para buscar por uma data específica;");
+                    System.out.println("\t" + "'i' - Para buscar por um intervalo de datas;");
+            
+                    System.out.print("\n" + "Qual a opção desejada? " + "\033[0m");                    
+
                     break;
 
                 case "r": 
