@@ -7,9 +7,9 @@ import java.util.Date;
 
 public class File_Importer {
 
-    public static void CSV_reader() {
+    public static void CSV_reader(String filePath) {
 
-        String file = "cadastro_pessoas.csv";
+        String file = filePath;
         BufferedReader reader = null;
         String line = "";
 
@@ -54,10 +54,10 @@ public class File_Importer {
             }
         } 
         catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("\033[31m" + "\n\t" + "ATENÇÃO: Arquivo ou diretório inexistente! Nenhum registro importado!" + "\033[0m");
         }
         finally {
-            System.out.println("\033[32m" + "Foram importados " + totalImported + " registros!" + "\033[0m");
+            System.out.println("\033[32m" + "\n\t" + "Foram importados " + totalImported + " registros!" + "\033[0m");
             try {
                 reader.close();
             } catch (IOException e) {
