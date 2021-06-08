@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Tree <T extends Comparable<? super T>>{
 
     private Nodo <T> root;
@@ -249,6 +251,33 @@ public class Tree <T extends Comparable<? super T>>{
             }
         }
         return currentNode;        
+    }
+
+    public void searchNodeByRange(Nodo <T> rootNode, T minKey, T maxKey) {
+
+        Nodo <T> currentNode = rootNode;
+        T currentNodeKey = currentNode.getKey();
+
+        if(currentNodeKey != null && currentNodeKey.compareTo(minKey) < 0) {
+            //System.out.println(currentNodeKey + " é menor que data mínima: " + minKey);
+            currentNode = rootNode.getLeftSon();
+            searchNodeByRange(currentNode, minKey, maxKey);
+        }
+        else if(currentNodeKey != null && currentNodeKey.compareTo(maxKey) > 0) {
+            //System.out.println(currentNodeKey + " é maior que data máxima: " + maxKey);
+            currentNode = rootNode.getRightSon();
+            searchNodeByRange(currentNode, minKey, maxKey);
+        }
+        else if(currentNodeKey != null && currentNodeKey.compareTo(minKey) >= 0 && currentNodeKey.compareTo(maxKey) <= 0) {
+            //System.out.println(currentNodeKey + " está entre: " + minKey + " e entre: " + maxKey);
+
+            currentNode.getPessoa().printInformations();
+            
+            searchNodeByRange(currentNode.getLeftSon(), minKey, maxKey);
+            searchNodeByRange(currentNode.getRightSon(), minKey, maxKey);
+            
+            
+        }
     }
 
     public void updateHeigh(Nodo <T> rootNode) {
