@@ -1,4 +1,4 @@
-public class Tree <T extends Comparable<T>>{
+public class Tree <T extends Comparable<? super T>>{
 
     private Nodo <T> root;
 
