@@ -1,9 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class File_Importer {
 
@@ -27,7 +27,7 @@ public class File_Importer {
 
                 Long cpf = readCPF(row, currentLine);
                 Integer rg = readRG(row, currentLine);
-                Date dataNasc = readDataNasc(row, currentLine);
+                LocalDate dataNasc = readDataNasc(row, currentLine);
 
                 if(cpf == null || rg == null || dataNasc == null) {
                     totalImported--;
@@ -47,7 +47,7 @@ public class File_Importer {
                         Nodo <String> newNodeNome = Main.NOME_TREE.insertNode(row[2], pessoa);
                         Main.NOME_TREE.checkTreeUnbalanceFromLeaf(newNodeNome);
 
-                        Nodo <Date> newNodeData = Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
+                        Nodo <LocalDate> newNodeData = Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
                         Main.DATANASC_TREE.checkTreeUnbalanceFromLeaf(newNodeData);
                     }
                 }   
@@ -101,15 +101,16 @@ public class File_Importer {
         return rg;
     }
 
-    public static Date readDataNasc(String[] row, int line) {
-        
-        Date dataNascimento = null;
-        
+    public static LocalDate readDataNasc(String[] row, int line) {
+
+        LocalDate dataNascimento = null;
+
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            dataNascimento = dateFormat.parse(row[3]);
-        } catch (NumberFormatException | ParseException e) {
-            System.out.println("\033[31m" + "Data inválida na linha " + line + "! Informe em formato 'dd/mm/aaaa'! Registro não importado!" + "\033[0m");                    
+            DateTimeFormatter convertInputDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dataNascimento = LocalDate.parse(row[3], convertInputDate);
+        }
+        catch (DateTimeParseException e){
+            System.out.println("\033[31m" + "Data inválida na linha " + line + "! Informe em formato 'dd/mm/aaaa'! Registro não importado!" + "\033[0m");
         }
         return dataNascimento;
     }
