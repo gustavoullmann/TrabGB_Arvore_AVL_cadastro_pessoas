@@ -1,17 +1,15 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-//import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Person {
 
     private Long cpf;
     private Integer rg;
     private String nome;
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     private String municipio;
     
-    public Person(Long cpf, Integer rg, String nome, Date dataNascimento, String municipio) {
+    public Person(Long cpf, Integer rg, String nome, LocalDate dataNascimento, String municipio) {
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
@@ -43,11 +41,11 @@ public class Person {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -60,9 +58,8 @@ public class Person {
     }
 
     public String dateConverter() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String dateConverted = (df.format(getDataNascimento()));  
-        return dateConverted; 
+        String dateConverted = dataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return dateConverted;
     }
 
     public void printInformations() {
