@@ -140,7 +140,7 @@ public class Tree <T extends Comparable<? super T>>{
             checkTreeUnbalanceFromLeaf(maxNode.getRightSon());
             }
         }
-
+    
     public void removeNonRootNode(Nodo <T> node) {
         Nodo <T> parent = node.getParent();
         Nodo <T> rightSon = node.getRightSon();
