@@ -113,33 +113,32 @@ public class Menu {
                     //String inputMaxDate = input.nextLine();
                     //LocalDate maxDate = readDataNasc(inputMaxDate);
 
-
                     break;
 
                 case "p":
 
-                    // Nodo rootNode = Main.AVL_TREE.getRoot();
-                    // Tree tree = Main.AVL_TREE;
+                    Nodo rootNode = Main.AVL_TREE.getRoot();
+                    Tree tree = Main.AVL_TREE;
 
-                    // System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore em múltiplos percursos: " + "\033[0m" + "\n");
+                    System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore em múltiplos percursos: " + "\033[0m" + "\n");
 
-                    // System.out.println(tree.printHeader());
-                    // tree.printTree(rootNode, 0);
-                    // System.out.println("\033[1;33m" + "Legenda: " + "\033[0m" + "nó[" + "\033[32m" + "fator balanceamento" + "\033[0m" + "]" + "\n");
+                    System.out.println(tree.printHeader());
+                    tree.printTree(rootNode, 0);
+                    System.out.println("\033[1;33m" + "Legenda: " + "\033[0m" + "nó[" + "\033[32m" + "fator balanceamento" + "\033[0m" + "]" + "\n");
 
-                    // System.out.print("\n" + "\033[1;33m" + "Pré ordem: " + "\033[0m" + "\t");
-                    // tree.preOrderTraversal(rootNode);
-                    // System.out.println();
+                    System.out.print("\n" + "\033[1;33m" + "Pré ordem: " + "\033[0m" + "\t");
+                    tree.preOrderTraversal(rootNode);
+                    System.out.println();
 
-                    // System.out.print("\033[1;33m" + "Em ordem: " + "\033[0m" + "\t");
-                    // tree.inOrderTraversal(rootNode);
-                    // System.out.println();
+                    System.out.print("\033[1;33m" + "Em ordem: " + "\033[0m" + "\t");
+                    tree.inOrderTraversal(rootNode);
+                    System.out.println();
 
-                    // System.out.print("\033[1;33m" + "Pós ordem: " + "\033[0m" + "\t");
-                    // tree.postOrderTraversal(rootNode);
-                    // System.out.print("\n");
+                    System.out.print("\033[1;33m" + "Pós ordem: " + "\033[0m" + "\t");
+                    tree.postOrderTraversal(rootNode);
+                    System.out.print("\n");
 
-                    // menu();
+                    menu();
                     break;
                 
                 case "s":
