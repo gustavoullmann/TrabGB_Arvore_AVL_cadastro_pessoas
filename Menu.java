@@ -84,7 +84,7 @@ public class Menu {
                         Nodo <Long> returnedNode = Main.CPF_TREE.searchNode(cpf);
 
                         if(returnedNode.getPessoa() == null) {
-                            System.out.println("\n" + "\033[31m" + "ATENÇÃO: Não foi encontrado nenhuma pessoa com o CPF '" + cpf + "'" + "\033[0m");
+                            System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: Não foi encontrado nenhuma pessoa com o CPF '" + cpf + "'" + "\033[0m");
                             menu();
                         }
                         else {
