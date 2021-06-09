@@ -74,7 +74,7 @@ public class Menu {
                 //     }
                      break;
 
-                case "b": 
+                case "cpf": 
 
                     System.out.print("\n" + "\033[1;33m" + "Digite o CPF que você quer buscar: " + "\033[0m");   
                     
@@ -89,7 +89,7 @@ public class Menu {
                         }
                         else {
                             System.out.println("\n" + "\033[1;33m" + "Abaixo as informações da pessoa com o CPF '" + cpf + "'" + "\033[0m" + "\n");
-                            System.out.println(returnedNode.printNodeAttributes());
+                            returnedNode.getPessoa().printInformations();
                             menu();
                         } 
                     } 
