@@ -106,6 +106,7 @@ public class Menu {
                                 Tree treeCpf = Main.CPF_TREE;
                                 Nodo rootNodeCpf = Main.CPF_TREE.getRoot();
 
+                                System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore de CPF em múltiplos percursos: " + "\033[0m" + "\n");
                                 printer(rootNodeCpf, treeCpf);
                                 break;
                                
@@ -113,6 +114,7 @@ public class Menu {
                                 Tree treeNome = Main.NOME_TREE;
                                 Nodo rootNodeNome = Main.NOME_TREE.getRoot();
 
+                                System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore de Nomes em múltiplos percursos: " + "\033[0m" + "\n");
                                 printer(rootNodeNome, treeNome);
                                 break;
 
@@ -120,6 +122,7 @@ public class Menu {
                                 Tree treeDate = Main.DATANASC_TREE;
                                 Nodo rootNodeDate = Main.DATANASC_TREE.getRoot();
 
+                                System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore de Datas de Nascimento em múltiplos percursos: " + "\033[0m" + "\n");
                                 printer(rootNodeDate, treeDate);
                                 break;
                             
@@ -172,8 +175,6 @@ public class Menu {
     }
 
     public static void printer(Nodo rootNode, Tree tree) {
-
-        System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore em múltiplos percursos: " + "\033[0m" + "\n");
 
         System.out.println(tree.printHeader());
         tree.printTree(rootNode, 0);
