@@ -78,8 +78,7 @@ public class Tree <T extends Comparable<? super T>>{
         else {
             removeNonRootNode(node);         
         }
-        checkTreeUnbalanceFromLeaf(nodeParent);
-        
+        checkTreeUnbalanceFromLeaf(nodeParent);     
     }
 
     public void removeRootNode(Nodo <T> node) {
@@ -259,24 +258,18 @@ public class Tree <T extends Comparable<? super T>>{
         T currentNodeKey = currentNode.getKey();
 
         if(currentNodeKey != null && currentNodeKey.compareTo(minKey) < 0) {
-            //System.out.println(currentNodeKey + " é menor que data mínima: " + minKey);
-            currentNode = rootNode.getLeftSon();
-            searchNodeByRange(currentNode, minKey, maxKey);
-        }
-        else if(currentNodeKey != null && currentNodeKey.compareTo(maxKey) > 0) {
-            //System.out.println(currentNodeKey + " é maior que data máxima: " + maxKey);
             currentNode = rootNode.getRightSon();
             searchNodeByRange(currentNode, minKey, maxKey);
         }
+        else if(currentNodeKey != null && currentNodeKey.compareTo(maxKey) > 0) {
+            currentNode = rootNode.getLeftSon();
+            searchNodeByRange(currentNode, minKey, maxKey);
+        }
         else if(currentNodeKey != null && currentNodeKey.compareTo(minKey) >= 0 && currentNodeKey.compareTo(maxKey) <= 0) {
-            //System.out.println(currentNodeKey + " está entre: " + minKey + " e entre: " + maxKey);
-
+            searchNodeByRange(currentNode.getLeftSon(), minKey, currentNodeKey);
+            searchNodeByRange(currentNode.getRightSon(), currentNodeKey, maxKey);          
+            
             currentNode.getPessoa().printInformations();
-            
-            searchNodeByRange(currentNode.getLeftSon(), minKey, maxKey);
-            searchNodeByRange(currentNode.getRightSon(), minKey, maxKey);
-            
-            
         }
     }
 
