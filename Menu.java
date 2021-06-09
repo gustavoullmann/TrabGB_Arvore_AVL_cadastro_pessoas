@@ -13,7 +13,7 @@ public class Menu {
 
         System.out.println("\t" + "'imp' - Para importar um arquivo CSV;");
         System.out.println("\t" + "'i' - Para inserir um nodo;");
-        System.out.println("\t" + "'b' - Para buscar um nodo;");
+        System.out.println("\t" + "'cpf' - Para buscar pelo CPF;");
         System.out.println("\t" + "'n' - Para buscar pela data de nascimento;");
         System.out.println("\t" + "'p' - Para imprimir a árvore em múltiplos percursos");
         System.out.println("\t" + "'s' - Para sair do programa");
@@ -74,29 +74,29 @@ public class Menu {
                 //     }
                      break;
 
-                case "b":                                       
-                   
-                    // System.out.print("\n" + "\033[1;33m" + "Digite um valor inteiro para buscar na árvore: " + "\033[0m");
-                        
-                    // try {
-                    //     int key = input.nextInt();
-                    //     Main.AVL_TREE.printSearchNodePath(key);
-                    //     Nodo returnedNode = Main.AVL_TREE.searchNode(key);
+                case "b": 
 
-                    //     if(returnedNode.getKey() == null) {
-                    //         System.out.println("\n" + "\033[31m" + "ATENÇÃO: o valor digitado não foi encontrado na árvore!" + "\033[0m");
-                    //         menu();
-                    //     }
-                    //     else {
-                    //         System.out.println("\n" + "\033[1;33m" + "Abaixo as informações do nó '" + key + "'" + "\033[0m" + "\n");
-                    //         System.out.println(returnedNode.printNodeAttributes());
-                    //         menu();
-                    //     }
-                    // } 
-                    // catch (Exception InputMismatchException) {
-                    //     System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou uma tecla não numérica! Voltando para o Menu inicial..." + "\033[0m");
-                    //     menu();
-                    // }
+                    System.out.print("\n" + "\033[1;33m" + "Digite o CPF que você quer buscar: " + "\033[0m");   
+                    
+                    try {                                      
+                    
+                        Long cpf = input.nextLong();
+                        Nodo <Long> returnedNode = Main.CPF_TREE.searchNode(cpf);
+
+                        if(returnedNode.getPessoa() == null) {
+                            System.out.println("\n" + "\033[31m" + "ATENÇÃO: Não foi encontrado nenhuma pessoa com o CPF '" + cpf + "'" + "\033[0m");
+                            menu();
+                        }
+                        else {
+                            System.out.println("\n" + "\033[1;33m" + "Abaixo as informações da pessoa com o CPF '" + cpf + "'" + "\033[0m" + "\n");
+                            System.out.println(returnedNode.printNodeAttributes());
+                            menu();
+                        } 
+                    } 
+                    catch (Exception InputMismatchException) {
+                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou uma tecla não numérica! Voltando para o Menu inicial..." + "\033[0m");
+                        menu();
+                    }
                     break;
 
                 case "n":
