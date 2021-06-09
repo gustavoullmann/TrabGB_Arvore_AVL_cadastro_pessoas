@@ -9,17 +9,6 @@ public class Main {
     
     public static void main(String[] args) {
         
-        //Menu.menu();
-        
-        File_Importer.CSV_reader("cadastro_pessoas.csv"); //TODO: remover esse teste   
-
-        String inputMinDate = "01/01/2001";
-        LocalDate minDate = Menu.readDataNasc(inputMinDate);
-        
-        String inputMaxDate = "01/01/2001";
-        LocalDate maxDate = Menu.readDataNasc(inputMaxDate);
-
-        DATANASC_TREE.searchNodeByRange(DATANASC_TREE.getRoot(), minDate, maxDate);
-
+        Menu.menu();
     }
 }
