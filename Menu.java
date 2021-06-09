@@ -11,9 +11,8 @@ public class Menu {
 
         System.out.println("\n" + "\033[1;33m" + "Escolha uma opção no menu abaixo:"  + "\n");
 
-        System.out.println("\t" + "'imp' - Para importar um arquivo CSV;");
-        System.out.println("\t" + "'i' - Para inserir um nodo;");
-        System.out.println("\t" + "'cpf' - Para buscar pelo CPF;");
+        System.out.println("\t" + "'imp' - Para importar um arquivo CSV;");                 //TODO; corrigir abreviação de menu
+        System.out.println("\t" + "'cpf' - Para buscar pelo CPF;");                         //TODO; corrigir abreviação de menu
         System.out.println("\t" + "'n' - Para buscar pela data de nascimento;");
         System.out.println("\t" + "'p' - Para imprimir a árvore em múltiplos percursos");
         System.out.println("\t" + "'s' - Para sair do programa");
@@ -47,32 +46,6 @@ public class Menu {
                         menu();
                     }
                     break;
-
-                case "i":
-            
-                //     try {
-                //         System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: Digite qualquer tecla não numérica para sair e voltar ao Menu principal! " + "\033[0m" + "\n");
-                        
-                //         boolean userIntegerInput = true;
-
-                //         while(userIntegerInput) {
-                //             System.out.print("\n" + "\033[1;33m" + "Digite um valor inteiro para inserir na árvore: " + "\033[0m");
-                        
-                //             int key = input.nextInt();
-                //             Nodo newNode = Main.AVL_TREE.insertNode(key);
-                //             Main.AVL_TREE.checkTreeUnbalanceFromLeaf(newNode);
-
-                //             System.out.println();
-                //             System.out.println(Main.AVL_TREE.printHeader());
-                //             Main.AVL_TREE.printTree(Main.AVL_TREE.getRoot(), 0);
-                //         }
-                //         menu();
-                //     } 
-                //     catch (Exception InputMismatchException) {
-                //         System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou uma tecla não numérica! Voltando para o Menu inicial..." + "\033[0m");
-                //         menu();
-                //     }
-                     break;
 
                 case "cpf": 
 
