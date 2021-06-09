@@ -52,7 +52,6 @@ public class Menu {
                     System.out.print("\n" + "\033[1;33m" + "Digite o CPF que você quer buscar: " + "\033[0m");   
                     
                     try {                                      
-                    
                         Long cpf = input.nextLong();
                         Nodo <Long> returnedNode = Main.CPF_TREE.searchNode(cpf);
 
@@ -90,27 +89,51 @@ public class Menu {
 
                 case "p":
 
-                    Nodo rootNode = Main.AVL_TREE.getRoot();
-                    Tree tree = Main.AVL_TREE;
+                    System.out.println("\n" + "\033[1;33m" + "Escolha uma árvore para impressão:"  + "\n");
 
-                    System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore em múltiplos percursos: " + "\033[0m" + "\n");
+                    System.out.println("\t" + "'c' - Para imprimir árvore de CPF;");                 //TODO; corrigir abreviação de menu
+                    System.out.println("\t" + "'n' - Para imprimir árvore de nome;");                         //TODO; corrigir abreviação de menu
+                    System.out.println("\t" + "'d' - Para imprimir árvore de data de nascimento;");
+            
+                    System.out.print("\n" + "Qual a opção desejada? " + "\033[0m");
 
-                    System.out.println(tree.printHeader());
-                    tree.printTree(rootNode, 0);
-                    System.out.println("\033[1;33m" + "Legenda: " + "\033[0m" + "nó[" + "\033[32m" + "fator balanceamento" + "\033[0m" + "]" + "\n");
+                    try {
+                        String option2 = input.nextLine();
 
-                    System.out.print("\n" + "\033[1;33m" + "Pré ordem: " + "\033[0m" + "\t");
-                    tree.preOrderTraversal(rootNode);
-                    System.out.println();
+                        switch(option2.toLowerCase()) {
 
-                    System.out.print("\033[1;33m" + "Em ordem: " + "\033[0m" + "\t");
-                    tree.inOrderTraversal(rootNode);
-                    System.out.println();
+                            case "c":
+                                Tree treeCpf = Main.CPF_TREE;
+                                Nodo rootNodeCpf = Main.CPF_TREE.getRoot();
 
-                    System.out.print("\033[1;33m" + "Pós ordem: " + "\033[0m" + "\t");
-                    tree.postOrderTraversal(rootNode);
-                    System.out.print("\n");
+                                printer(rootNodeCpf, treeCpf);
+                                break;
+                               
+                            case "n":
+                                Tree treeNome = Main.NOME_TREE;
+                                Nodo rootNodeNome = Main.NOME_TREE.getRoot();
 
+                                printer(rootNodeNome, treeNome);
+                                break;
+
+                            case "d":
+                                Tree treeDate = Main.DATANASC_TREE;
+                                Nodo rootNodeDate = Main.DATANASC_TREE.getRoot();
+
+                                printer(rootNodeDate, treeDate);
+                                break;
+                            
+                            default:
+                                System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: a opção digitada não consta no menu!" + "\033[0m");
+                                System.out.println("\t" + "\033[31m" + "Digite apenas as letras 'c', 'n' ou 'd'!" + "\033[0m" + "\n");
+                                menu();
+                                break;
+                        }
+                    }
+                    catch (Exception e) {
+                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: a opção digitada não consta no menu!" + "\033[0m");
+                        menu();
+                    }
                     menu();
                     break;
                 
@@ -146,5 +169,26 @@ public class Menu {
             menu();
         }
         return dataNascimento;
+    }
+
+    public static void printer(Nodo rootNode, Tree tree) {
+
+        System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore em múltiplos percursos: " + "\033[0m" + "\n");
+
+        System.out.println(tree.printHeader());
+        tree.printTree(rootNode, 0);
+        System.out.println("\033[1;33m" + "Legenda: " + "\033[0m" + "nó[" + "\033[32m" + "fator balanceamento" + "\033[0m" + "]" + "\n");
+
+        System.out.print("\n" + "\033[1;33m" + "Pré ordem: " + "\033[0m" + "\t");
+        tree.preOrderTraversal(rootNode);
+        System.out.println();
+
+        System.out.print("\033[1;33m" + "Em ordem: " + "\033[0m" + "\t");
+        tree.inOrderTraversal(rootNode);
+        System.out.println();
+
+        System.out.print("\033[1;33m" + "Pós ordem: " + "\033[0m" + "\t");
+        tree.postOrderTraversal(rootNode);
+        System.out.print("\n");
     }
 }
