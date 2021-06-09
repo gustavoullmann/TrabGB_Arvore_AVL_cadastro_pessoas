@@ -124,11 +124,15 @@ public class Nodo <T> {
 	public String printNodeAttributes() {							//Não fizemos override de toString: gerava erro recursivo e "consumia" o método que imprime o endereço de memória do objeto
 		return 	"\033[32m" +
 				"Key: " + key + "\n" +
-				"Pessoa: " + pessoa + "\n" +
-				"Parent: " + parent + "\n" +
-				"Right Son: " + rightSon + "\n" +
-				"Left Son: " + leftSon + "\n" +
-				"Node Height: " + nodeHeight + "\n" +
-				"Balance Factor: " + balanceFactor + "\033[0m";
+				"Nome: " + pessoa.getNome() + "\n" +
+        "RG: " + pessoa.getRg() + "\n" +
+        "CPF: " + pessoa.getCpf() + "\n" +    
+        "Data de Nascimento: " + pessoa.dateConverter() + "\n" +
+        "Municipio: " + pessoa.getMunicipio() + "\033[0m";
+				//"Parent: " + parent + "\n" +
+				//"Right Son: " + rightSon + "\n" +
+				//"Left Son: " + leftSon + "\n" +
+				//"Node Height: " + nodeHeight + "\n" +
+				//"Balance Factor: " + balanceFactor + "\033[0m";
 	}   
 }

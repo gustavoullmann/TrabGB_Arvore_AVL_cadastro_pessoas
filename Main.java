@@ -2,21 +2,25 @@ import java.util.Date;
 
 public class Main {
 
-    static Tree<Integer> AVL_TREE = new Tree<Integer>();   //TODO: remover essa instância: foi colocada só para eliminar os erros da classe Menu (métodos do trabalho antigo)
     static Tree<Long> CPF_TREE = new Tree<Long>();   
     static Tree<String> NOME_TREE = new Tree<String>(); 
     static Tree<Date> DATANASC_TREE = new Tree<Date>();
     
     public static void main(String[] args) {
+        File_Importer.CSV_reader(); 
         Menu.menu();
-        //File_Importer.CSV_reader("/home/gustavo/Área de Trabalho/cadastro_pessoas_random.csv"); //TODO: remover esse teste   
+        //File_Importer.CSV_reader(); //TODO: remover esse teste
+        //CPF_TREE.inOrderTraversal(CPF_TREE.getRoot());
+        //System.out.println();
+        //NOME_TREE.inOrderTraversal(NOME_TREE.getRoot());
+        //System.out.println();
+        //DATANASC_TREE.inOrderTraversal(DATANASC_TREE.getRoot());
+        /*
+        Long teste = Long.valueOf("90123456780");
 
-        // CPF_TREE.printTree(CPF_TREE.getRoot(), 0);                  //TODO: remover esse teste  
-        // System.out.println("\n\n" + "##############################################################################");  //TODO: remover esse teste  
-        // NOME_TREE.printTree(NOME_TREE.getRoot(), 0);                //TODO: remover esse teste  
-        // System.out.println("\n\n" + "##############################################################################");  //TODO: remover esse teste  
-        // DATANASC_TREE.printTree(DATANASC_TREE.getRoot(), 0);        //TODO: remover esse teste  
+        Nodo <Long> returnedNode = CPF_TREE.searchNode(teste);
+        System.out.println(returnedNode.printNodeAttributes());
+        */
 
-        //Menu.menu();
     }
 }

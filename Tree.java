@@ -1,6 +1,4 @@
-import java.time.LocalDate;
-
-public class Tree <T extends Comparable<? super T>>{
+public class Tree <T extends Comparable<T>>{
 
     private Nodo <T> root;
 
@@ -19,9 +17,8 @@ public class Tree <T extends Comparable<? super T>>{
     public Nodo <T> findMinNode(Nodo <T> root) {
         
         Nodo <T> minNode = root;
-        T minNodeKey = minNode.getLeftSon().getKey();
 
-        while(minNodeKey != null) {
+        while(minNode.getLeftSon().getKey() != null) {
             minNode = minNode.getLeftSon();
         }
         return minNode;        
@@ -30,9 +27,8 @@ public class Tree <T extends Comparable<? super T>>{
     public Nodo <T> findMaxNode(Nodo <T> root) {
 
         Nodo <T> maxNode = root;
-        T maxNodeKey = maxNode.getRightSon().getKey();
 
-        while(maxNodeKey != null) {
+        while(maxNode.getRightSon().getKey() != null) {
             maxNode = maxNode.getRightSon();
         }
         return maxNode;
@@ -42,24 +38,29 @@ public class Tree <T extends Comparable<? super T>>{
 
         Nodo <T> node = searchNode(key);
 
-        node.setKey(key);
-        node.setPessoa(pessoa);
+        if(node.getKey() != null && node.getKey().compareTo(key) == 0) {
+            System.out.println("\n" + "ATENÇÃO: o valor '" + key + "' já está existe na árvore!");
+        }
+        else {
+            node.setKey(key);
+            node.setPessoa(pessoa);
 
-        Nodo <T> leftSonNode = new Nodo <T> ();
-        Nodo <T> rightSonNode = new Nodo <T> ();
+            Nodo <T> leftSonNode = new Nodo <T> ();
+            Nodo <T> rightSonNode = new Nodo <T> ();
+    
+            node.setLeftSon(leftSonNode);
+            node.setRightSon(rightSonNode);
+    
+            leftSonNode.setParent(node);
+            rightSonNode.setParent(node);
+    
+            Nodo.calculateBalanceFactor(node);
+            Nodo.calculateNodeHeight(node);
 
-        node.setLeftSon(leftSonNode);
-        node.setRightSon(rightSonNode);
-
-        leftSonNode.setParent(node);
-        rightSonNode.setParent(node);
-
-        Nodo.calculateBalanceFactor(node);
-        Nodo.calculateNodeHeight(node);
-
-        updateHeigh(root);
-        updateBalanceFactor(root);
+            updateHeigh(root);
+            updateBalanceFactor(root);
         
+        }
         return node;
     }
 
@@ -253,38 +254,9 @@ public class Tree <T extends Comparable<? super T>>{
         return currentNode;        
     }
 
-    public void searchNodeByRange(Nodo <T> rootNode, T minKey, T maxKey) {
+    public void updateHeigh(Nodo <T> rootNode) {                        
 
-        Nodo <T> currentNode = rootNode;
-        T currentNodeKey = currentNode.getKey();
-
-        if(currentNodeKey != null && currentNodeKey.compareTo(minKey) < 0) {
-            //System.out.println(currentNodeKey + " é menor que data mínima: " + minKey);
-            currentNode = rootNode.getLeftSon();
-            searchNodeByRange(currentNode, minKey, maxKey);
-        }
-        else if(currentNodeKey != null && currentNodeKey.compareTo(maxKey) > 0) {
-            //System.out.println(currentNodeKey + " é maior que data máxima: " + maxKey);
-            currentNode = rootNode.getRightSon();
-            searchNodeByRange(currentNode, minKey, maxKey);
-        }
-        else if(currentNodeKey != null && currentNodeKey.compareTo(minKey) >= 0 && currentNodeKey.compareTo(maxKey) <= 0) {
-            //System.out.println(currentNodeKey + " está entre: " + minKey + " e entre: " + maxKey);
-
-            currentNode.getPessoa().printInformations();
-            
-            searchNodeByRange(currentNode.getLeftSon(), minKey, maxKey);
-            searchNodeByRange(currentNode.getRightSon(), minKey, maxKey);
-            
-            
-        }
-    }
-
-    public void updateHeigh(Nodo <T> rootNode) {
-        
-        T rootNodeKey = rootNode.getKey();
-
-        if(rootNodeKey == null) {
+        if(rootNode.getKey() == null) {
             rootNode.setNodeHeight(-1);
         }
         else {
@@ -297,9 +269,7 @@ public class Tree <T extends Comparable<? super T>>{
 
     public void updateBalanceFactor(Nodo <T> rootNode) {                
        
-        T rootNodeKey = rootNode.getKey();
-
-        if(rootNodeKey == null) {
+        if(rootNode.getKey() == null) {
             rootNode.setBalanceFactor(0);
         }
         else {
