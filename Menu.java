@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 import java.time.format.DateTimeParseException;
 
 public class Menu {          
@@ -74,17 +75,35 @@ public class Menu {
                 case "n":
                     
                     System.out.println("\n" + "\033[1;33m" + "Digite uma data inicial e uma data final para busca, no formato 'dd/mm/aaaa':" + "\033[0m");
-                    
+                    System.out.println("\n" + "\033[1;33m" + "Caso deseje pesquisar por um único dia, informe datas iguais para início e fim!" + "\033[0m");
+
                     System.out.print("\n\t" + "\033[1;33m" + "Data inicial: " + "\033[0m");
 
-                    //String inputMinDate = input.nextLine();
-                    //LocalDate minDate = readDataNasc(inputMinDate);
+                    String inputMinDate = input.nextLine();
+                    LocalDate minDate = readDataNasc(inputMinDate);
 
                     System.out.print("\t" + "\033[1;33m" + "Data final: " + "\033[0m");      
                     
-                    //String inputMaxDate = input.nextLine();
-                    //LocalDate maxDate = readDataNasc(inputMaxDate);
+                    String inputMaxDate = input.nextLine();
+                    LocalDate maxDate = readDataNasc(inputMaxDate);
 
+                    if(minDate.isAfter(maxDate)) {
+                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: a data final é anterior a data inicial!" + "\033[0m");
+                        menu();
+                    } 
+                    else {
+                        Nodo<LocalDate> rootNode = Main.DATANASC_TREE.getRoot();
+
+                        Tree<LocalDate> resultSearchTree = Main.DATANASC_TREE.searchNodeByRange(rootNode, minDate, maxDate);
+
+                        if(resultSearchTree.getRoot().getKey() == null) {
+                            System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: Não foram encontrados resultados para as datas informadas!" + "\033[0m");
+                        }
+                        else {
+                            resultSearchTree.inOrderTraversal(resultSearchTree.getRoot());
+                        }
+                        menu();
+                    }
                     break;
 
                 case "p":
