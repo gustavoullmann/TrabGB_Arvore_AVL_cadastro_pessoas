@@ -64,10 +64,11 @@ public class Person {
 
     public void printInformations() {
         System.out.println(
-            "CPF: " + cpf + "\n" +
-            "RG: " + rg + "\n" +
-            "Nome: " + nome + "\n" +
-            "Data de Nascimento: " + dateConverter() + "\n" +
-            "Município: " + municipio);
+            "\033[32m" +
+            "\t" + "CPF: " + cpf + "\n" +
+            "\t" + "RG: " + rg + "\n" +
+            "\t" + "Nome: " + nome + "\n" +
+            "\t" + "Data de Nascimento: " + dateConverter() + "\n" +
+            "\t" + "Município: " + municipio + "\033[0m");
     }
 }
