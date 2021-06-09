@@ -9,27 +9,17 @@ public class Main {
     
     public static void main(String[] args) {
         
-        Menu.menu();
-        
-        //File_Importer.CSV_reader("cadastro_pessoas.csv"); //TODO: remover esse teste   
-
-
-        // DATANASC_TREE.printTree(DATANASC_TREE.getRoot(), 0);
-
-        // String inputMinDate = "01/01/2001";
-        // LocalDate minDate = Menu.readDataNasc(inputMinDate);
-        
-        // String inputMaxDate = "07/08/2007";
-        // LocalDate maxDate = Menu.readDataNasc(inputMaxDate);
-
-        // DATANASC_TREE.searchNode(minDate).getPessoa().printInformations();
-
-        // CPF_TREE.printTree(CPF_TREE.getRoot(), 0);                  //TODO: remover esse teste  
-        // System.out.println("\n\n" + "##############################################################################");  //TODO: remover esse teste  
-        // NOME_TREE.printTree(NOME_TREE.getRoot(), 0);                //TODO: remover esse teste  
-        // System.out.println("\n\n" + "##############################################################################");  //TODO: remover esse teste  
-        // DATANASC_TREE.printTree(DATANASC_TREE.getRoot(), 0);        //TODO: remover esse teste  
-
         //Menu.menu();
+        
+        File_Importer.CSV_reader("cadastro_pessoas.csv"); //TODO: remover esse teste   
+
+        String inputMinDate = "01/01/2001";
+        LocalDate minDate = Menu.readDataNasc(inputMinDate);
+        
+        String inputMaxDate = "01/01/2001";
+        LocalDate maxDate = Menu.readDataNasc(inputMaxDate);
+
+        DATANASC_TREE.searchNodeByRange(DATANASC_TREE.getRoot(), minDate, maxDate);
+
     }
 }
