@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
 import java.time.format.DateTimeParseException;
 
 public class Menu {          
@@ -93,14 +92,15 @@ public class Menu {
                     } 
                     else {
                         Nodo<LocalDate> rootNode = Main.DATANASC_TREE.getRoot();
+                        Tree<LocalDate> searchByRangeResultTree = new Tree<LocalDate>();
+                        searchByRangeResultTree.searchNodeByRangeDate(rootNode, minDate, maxDate);
+                        Nodo<LocalDate> rootNodeResultTree = searchByRangeResultTree.getRoot();
 
-                        Tree<LocalDate> resultSearchTree = Main.DATANASC_TREE.searchNodeByRange(rootNode, minDate, maxDate);
-
-                        if(resultSearchTree.getRoot().getKey() == null) {
-                            System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: Não foram encontrados resultados para as datas informadas!" + "\033[0m");
+                        if(rootNodeResultTree.getKey() == null) {
+                            System.out.println("\n\t" + "\033[31m" + "Não foram encontrados resultados para as datas pesquisadas!" + "\033[0m");
                         }
                         else {
-                            resultSearchTree.inOrderTraversal(resultSearchTree.getRoot());
+                            searchByRangeResultTree.printInformationsInOrderTraversal(rootNodeResultTree);
                         }
                         menu();
                     }
@@ -193,7 +193,7 @@ public class Menu {
         return dataNascimento;
     }
 
-    public static void printer(Nodo rootNode, Tree tree) {
+    public static <T> void printer(Nodo<T> rootNode, Tree tree) {
 
         System.out.println(tree.printHeader());
         tree.printTree(rootNode, 0);
