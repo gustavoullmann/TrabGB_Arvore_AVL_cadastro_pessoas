@@ -1,6 +1,5 @@
-import java.time.LocalDate;
 
-public class Tree <T extends Comparable<? super T>>{
+public class Tree <T extends Comparable<? super T>> {
 
     private Nodo <T> root;
 
@@ -252,24 +251,24 @@ public class Tree <T extends Comparable<? super T>>{
         return currentNode;        
     }
 
-    public void searchNodeByRange(Nodo <T> rootNode, T minKey, T maxKey) {
-
+    public void searchNodeByRangeDate(Nodo <T> rootNode, T minKey, T maxKey) {
         Nodo <T> currentNode = rootNode;
         T currentNodeKey = currentNode.getKey();
 
         if(currentNodeKey != null && currentNodeKey.compareTo(minKey) < 0) {
             currentNode = rootNode.getRightSon();
-            searchNodeByRange(currentNode, minKey, maxKey);
+            searchNodeByRangeDate(currentNode, minKey, maxKey);
         }
         else if(currentNodeKey != null && currentNodeKey.compareTo(maxKey) > 0) {
             currentNode = rootNode.getLeftSon();
-            searchNodeByRange(currentNode, minKey, maxKey);
+            searchNodeByRangeDate(currentNode, minKey, maxKey);
         }
         else if(currentNodeKey != null && currentNodeKey.compareTo(minKey) >= 0 && currentNodeKey.compareTo(maxKey) <= 0) {
-            searchNodeByRange(currentNode.getLeftSon(), minKey, currentNodeKey);
-            searchNodeByRange(currentNode.getRightSon(), currentNodeKey, maxKey);          
-            
-            currentNode.getPessoa().printInformations();
+
+            insertNode(currentNodeKey, currentNode.getPessoa());
+
+            searchNodeByRangeDate(currentNode.getLeftSon(), minKey, currentNodeKey);
+            searchNodeByRangeDate(currentNode.getRightSon(), currentNodeKey, maxKey);
         }
     }
 
@@ -503,6 +502,18 @@ public class Tree <T extends Comparable<? super T>>{
             postOrderTraversal(node.getRightSon());
 
             System.out.print("\033[32m" + node.getKey() + "\033[0m" + "\t");
+        }
+    }
+
+    public void printInformationsInOrderTraversal(Nodo <T> node) {
+
+        if(node.getKey() != null) {
+            printInformationsInOrderTraversal(node.getLeftSon());
+
+            System.out.println();
+            node.getPessoa().printInformations();
+
+            printInformationsInOrderTraversal(node.getRightSon());
         }
     }
  }
