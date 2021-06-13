@@ -38,7 +38,7 @@ public class File_Importer {
                     
                     if(duplicatedCpf) {
                         totalImported--;
-                        System.out.println("\033[31m" + "CPF duplicado na linha " + currentLine + "! Registro não importado!" + "\033[0m");
+                        System.out.print("\033[31m" + "\n\t" + "CPF duplicado na linha " + currentLine + "! Registro não importado!" + "\033[0m");
                     } 
                     else {
                         Nodo <Long> newNodeCpf = Main.CPF_TREE.insertNode(cpf, pessoa);
@@ -52,12 +52,13 @@ public class File_Importer {
                     }
                 }   
             }
+            System.out.println();
         } 
         catch (Exception e) {
             System.out.println("\033[31m" + "\n\t" + "ATENÇÃO: Arquivo ou diretório inexistente! Nenhum registro importado!" + "\033[0m");
         }
         finally {
-            System.out.println("\033[32m" + "\n\t" + "Foram importados " + totalImported + " registros!" + "\033[0m");
+            System.out.println("\033[32m" + "\t" + "Foram importados " + totalImported + " registros!" + "\033[0m");
             try {
                 reader.close();
             } catch (IOException e) {
