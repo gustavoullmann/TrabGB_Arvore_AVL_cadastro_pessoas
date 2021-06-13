@@ -28,7 +28,7 @@ public class Menu {
                 case "i":
 
                     try {
-                        System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: esta função está configurada para trabalhar com arquivos .CSV cujo separador é ';'." + 
+                        System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: esta função está configurada para trabalhar com arquivos '.CSV' cujo separador é ';'." + 
                         "\n\t" + "As colunas devem respeitar a seguinte ordem: " + 
                         "\033[32m" + "CPF" + "\033[0m" + ";" + 
                         "\033[32m" + "RG" + "\033[0m" + ";" + 
@@ -89,9 +89,12 @@ public class Menu {
                     break;
 
                 case "d":
-                    
-                    System.out.println("\n" + "\033[1;33m" + "Digite uma data inicial e uma data final para busca, no formato 'dd/mm/aaaa':" + "\033[0m");
-                    System.out.println("\n" + "\033[1;33m" + "Caso deseje pesquisar por um único dia, informe datas iguais para início e fim!" + "\033[0m");
+
+                    System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: Digite uma data inicial e uma data final para busca, no formato "+
+                    "\033[32m" + "dd" + "\033[0m" + "/" + 
+                    "\033[32m" + "mm" + "\033[0m" + "/" + 
+                    "\033[32m" + "aaaa" + "\033[31m" + 
+                    "\n\t" + "Caso deseje pesquisar por um único dia, informe datas iguais para início e fim!" + "\033[0m" + "\n");
 
                     System.out.print("\n\t" + "\033[1;33m" + "Data inicial: " + "\033[0m");
 
