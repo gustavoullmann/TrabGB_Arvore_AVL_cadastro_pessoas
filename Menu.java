@@ -11,9 +11,10 @@ public class Menu {
 
         System.out.println("\n" + "\033[1;33m" + "Escolha uma opção no menu abaixo:"  + "\n");
 
-        System.out.println("\t" + "'imp' - Para importar um arquivo CSV;");                 //TODO; corrigir abreviação de menu
-        System.out.println("\t" + "'cpf' - Para buscar pelo CPF;");                         //TODO; corrigir abreviação de menu
-        System.out.println("\t" + "'n' - Para buscar pela data de nascimento;");
+        System.out.println("\t" + "'i' - Para importar um arquivo CSV;");
+        System.out.println("\t" + "'c' - Para buscar pelo CPF;");
+        System.out.println("\t" + "'n' - Para buscar pelo nome;");
+        System.out.println("\t" + "'d' - Para buscar pela data de nascimento;");
         System.out.println("\t" + "'p' - Para imprimir a árvore em múltiplos percursos");
         System.out.println("\t" + "'s' - Para sair do programa");
 
@@ -24,7 +25,7 @@ public class Menu {
 
             switch(option.toLowerCase()) {
 
-                case "imp":
+                case "i":
 
                     try {
                         System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: esta função está configurada para trabalhar com arquivos .CSV cujo separador é ';'." + 
@@ -47,7 +48,7 @@ public class Menu {
                     }
                     break;
 
-                case "cpf": 
+                case "c": 
 
                     System.out.print("\n" + "\033[1;33m" + "Digite o CPF que você quer buscar: " + "\033[0m");   
                     
@@ -72,6 +73,22 @@ public class Menu {
                     break;
 
                 case "n":
+
+                    System.out.print("\n" + "\033[1;33m" + "Digite o nome, ou parte desse, que você quer buscar: " + "\033[0m");
+
+                    try {
+                        String nome = input.next();
+                        nome.toLowerCase();
+
+                    }
+                    catch (Exception InputMismatchException) {
+                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou nome inválido! Voltando para o Menu inicial..." + "\033[0m");
+                        menu();
+
+                    }
+                    break;
+
+                case "d":
                     
                     System.out.println("\n" + "\033[1;33m" + "Digite uma data inicial e uma data final para busca, no formato 'dd/mm/aaaa':" + "\033[0m");
                     System.out.println("\n" + "\033[1;33m" + "Caso deseje pesquisar por um único dia, informe datas iguais para início e fim!" + "\033[0m");
@@ -110,8 +127,8 @@ public class Menu {
 
                     System.out.println("\n" + "\033[1;33m" + "Escolha uma árvore para impressão:"  + "\n");
 
-                    System.out.println("\t" + "'c' - Para imprimir árvore de CPF;");                 //TODO; corrigir abreviação de menu
-                    System.out.println("\t" + "'n' - Para imprimir árvore de nome;");                         //TODO; corrigir abreviação de menu
+                    System.out.println("\t" + "'c' - Para imprimir árvore de CPF;");
+                    System.out.println("\t" + "'n' - Para imprimir árvore de nome;");
                     System.out.println("\t" + "'d' - Para imprimir árvore de data de nascimento;");
             
                     System.out.print("\n" + "Qual a opção desejada? " + "\033[0m");
@@ -165,14 +182,14 @@ public class Menu {
 
                 default:
                     System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: a opção digitada não consta no menu!" + "\033[0m");
-                    System.out.println("\t" + "\033[31m" + "Digite apenas as letras 'i', 'b', 'r', 'p' ou 's'!" + "\033[0m" + "\n");
+                    System.out.println("\t" + "\033[31m" + "Digite apenas as letras 'i', 'c', 'n', 'd', 'p' ou 's'!" + "\033[0m" + "\n");
                     menu();
                     break;
             }
         }
         catch (Exception e) {
             System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: a opção digitada não consta no menu!" + "\033[0m");
-            System.out.println("\t" + "\033[31m" + "Digite apenas as letras 'i', 'b', 'r', 'p' ou 's'!" + "\033[0m" + "\n");
+            System.out.println("\t" + "\033[31m" + "Digite apenas as letras 'i', 'c', 'n', 'd', 'p' ou 's'!" + "\033[0m" + "\n");
             menu();
         }
         input.close();
