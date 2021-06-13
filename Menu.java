@@ -9,6 +9,10 @@ public class Menu {
 
         Scanner input = new Scanner(System.in);
 
+        if(Main.CPF_TREE.getRoot().getKey() == null) {
+            System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: não existem registros carregados! Escolha a opção 'i' para fazer a importação!" + "\033[0m");
+        }
+
         System.out.println("\n" + "\033[1;33m" + "Escolha uma opção no menu abaixo:"  + "\n");
 
         System.out.println("\t" + "'i' - Para importar um arquivo CSV;");
@@ -49,80 +53,94 @@ public class Menu {
                     break;
 
                 case "c": 
+                    if(Main.CPF_TREE.getRoot().getKey() == null) {
+                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: não é possível buscar por CPF!" + "\033[0m");
+                        menu();
+                    }
+                    else {
+                        System.out.print("\n" + "\033[1;33m" + "Digite o CPF que você quer buscar: " + "\033[0m"); 
 
-                    System.out.print("\n" + "\033[1;33m" + "Digite o CPF que você quer buscar: " + "\033[0m");   
-                    
-                    try {                                      
-                        Long cpf = input.nextLong();
-                        Nodo <Long> returnedNode = Main.CPF_TREE.searchNode(cpf);
+                        try {                                      
+                            Long cpf = input.nextLong();
+                            Nodo <Long> returnedNode = Main.CPF_TREE.searchNode(cpf);
 
-                        if(returnedNode.getPessoa() == null) {
-                            System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: Não foi encontrado nenhuma pessoa com o CPF '" + cpf + "'" + "\033[0m");
+                            if(returnedNode.getPessoa() == null) {
+                                System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: Não foi encontrado nenhuma pessoa com o CPF '" + cpf + "'" + "\033[0m");
+                                menu();
+                            }
+                            else {
+                                System.out.println("\n" + "\033[1;33m" + "Abaixo as informações da pessoa com o CPF '" + cpf + "'" + "\033[0m" + "\n");
+                                returnedNode.getPessoa().printInformations();
+                                menu();
+                            } 
+                        } 
+                        catch (Exception InputMismatchException) {
+                            System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou uma tecla não numérica! Voltando para o Menu inicial..." + "\033[0m");
                             menu();
                         }
-                        else {
-                            System.out.println("\n" + "\033[1;33m" + "Abaixo as informações da pessoa com o CPF '" + cpf + "'" + "\033[0m" + "\n");
-                            returnedNode.getPessoa().printInformations();
-                            menu();
-                        } 
-                    } 
-                    catch (Exception InputMismatchException) {
-                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou uma tecla não numérica! Voltando para o Menu inicial..." + "\033[0m");
-                        menu();
                     }
                     break;
 
                 case "n":
 
-                    System.out.print("\n" + "\033[1;33m" + "Digite o nome, ou parte desse, que você quer buscar: " + "\033[0m");
-
-                    try {
-                        String nome = input.next();
-                        nome.toLowerCase();
-
-                    }
-                    catch (Exception InputMismatchException) {
-                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou nome inválido! Voltando para o Menu inicial..." + "\033[0m");
+                    if(Main.NOME_TREE.getRoot().getKey() == null) {
+                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: não é possível buscar por nome!" + "\033[0m");
                         menu();
+                    }
+                    else {
+                        System.out.print("\n" + "\033[1;33m" + "Digite o nome, ou parte desse, que você quer buscar: " + "\033[0m");
 
+                        try {
+                            //TODO: inserir chamada de método aqui.
+                        }
+                        catch (Exception InputMismatchException) {
+                            System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou nome inválido! Voltando para o Menu inicial..." + "\033[0m");
+                            menu();
+                        }
                     }
                     break;
 
                 case "d":
 
-                    System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: Digite uma data inicial e uma data final para busca, no formato "+
-                    "\033[32m" + "dd" + "\033[0m" + "/" + 
-                    "\033[32m" + "mm" + "\033[0m" + "/" + 
-                    "\033[32m" + "aaaa" + "\033[31m" + 
-                    "\n\t" + "Caso deseje pesquisar por um único dia, informe datas iguais para início e fim!" + "\033[0m" + "\n");
-
-                    System.out.print("\n\t" + "\033[1;33m" + "Data inicial: " + "\033[0m");
-
-                    String inputMinDate = input.nextLine();
-                    LocalDate minDate = readDataNasc(inputMinDate);
-
-                    System.out.print("\t" + "\033[1;33m" + "Data final: " + "\033[0m");      
-                    
-                    String inputMaxDate = input.nextLine();
-                    LocalDate maxDate = readDataNasc(inputMaxDate);
-
-                    if(minDate.isAfter(maxDate)) {
-                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: a data final é anterior a data inicial!" + "\033[0m");
+                    if(Main.DATANASC_TREE.getRoot().getKey() == null) {
+                        System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: não é possível buscar por data de nascimento!" + "\033[0m");
                         menu();
-                    } 
+                    }
                     else {
-                        Nodo<LocalDate> rootNode = Main.DATANASC_TREE.getRoot();
-                        Tree<LocalDate> searchByRangeResultTree = new Tree<LocalDate>();
-                        searchByRangeResultTree.searchNodeByRangeDate(rootNode, minDate, maxDate);
-                        Nodo<LocalDate> rootNodeResultTree = searchByRangeResultTree.getRoot();
-
-                        if(rootNodeResultTree.getKey() == null) {
-                            System.out.println("\n\t" + "\033[31m" + "Não foram encontrados resultados para as datas pesquisadas!" + "\033[0m");
-                        }
+                        System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: Digite uma data inicial e uma data final para busca, no formato " +
+                        "\033[32m" + "dd" + "\033[0m" + "/" + 
+                        "\033[32m" + "mm" + "\033[0m" + "/" + 
+                        "\033[32m" + "aaaa" + "\033[31m" + 
+                        "\n\t" + "Caso deseje pesquisar por um único dia, informe datas iguais para início e fim!" + "\033[0m" + "\n");
+    
+                        System.out.print("\n\t" + "\033[1;33m" + "Data inicial: " + "\033[0m");
+    
+                        String inputMinDate = input.nextLine();
+                        LocalDate minDate = readDataNasc(inputMinDate);
+    
+                        System.out.print("\t" + "\033[1;33m" + "Data final: " + "\033[0m");      
+                        
+                        String inputMaxDate = input.nextLine();
+                        LocalDate maxDate = readDataNasc(inputMaxDate);
+    
+                        if(minDate.isAfter(maxDate)) {
+                            System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: a data final é anterior a data inicial!" + "\033[0m");
+                            menu();
+                        } 
                         else {
-                            searchByRangeResultTree.printInformationsInOrderTraversal(rootNodeResultTree);
+                            Nodo<LocalDate> rootNode = Main.DATANASC_TREE.getRoot();
+                            Tree<LocalDate> searchByRangeResultTree = new Tree<LocalDate>();
+                            searchByRangeResultTree.searchNodeByRangeDate(rootNode, minDate, maxDate);
+                            Nodo<LocalDate> rootNodeResultTree = searchByRangeResultTree.getRoot();
+    
+                            if(rootNodeResultTree.getKey() == null) {
+                                System.out.println("\n\t" + "\033[31m" + "Não foram encontrados resultados para as datas pesquisadas!" + "\033[0m");
+                            }
+                            else {
+                                searchByRangeResultTree.printInformationsInOrderTraversal(rootNodeResultTree);
+                            }
+                            menu();
                         }
-                        menu();
                     }
                     break;
 
