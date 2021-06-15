@@ -91,7 +91,11 @@ public class Menu {
                         System.out.print("\n" + "\033[1;33m" + "Digite o nome, ou parte desse, que você quer buscar: " + "\033[0m");
 
                         try {
-                            //TODO: inserir chamada de método aqui.
+                            String sequence = input.next();
+
+                            Nodo<String> returnedNode = Search_String.searchSubTreeRootNode(Main.NOME_TREE, sequence);
+                            Search_String.inOrderTraversal(returnedNode, sequence);
+                            menu();
                         }
                         catch (Exception InputMismatchException) {
                             System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: você digitou nome inválido! Voltando para o Menu inicial..." + "\033[0m");
