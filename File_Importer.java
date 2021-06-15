@@ -85,7 +85,7 @@ public class File_Importer {
         try {
             cpf = Long.valueOf(row[0]);
         } catch (NumberFormatException e) {
-            System.out.println("\033[31m" + "CPF inválido na linha " + line + "! Informe apenas números! Registro não importado!" + "\033[0m");                    
+            System.out.print("\n\t" + "\033[31m" + "CPF inválido na linha " + line + "! Informe apenas números! Registro não importado!" + "\033[0m");                    
         }
         return cpf;
     }
@@ -97,7 +97,7 @@ public class File_Importer {
         try {
             rg = Integer.valueOf(row[1]);
         } catch (NumberFormatException e) {
-            System.out.println("\033[31m" + "RG inválido na linha " + line + "! Informe apenas números! Registro não importado!" + "\033[0m");                    
+            System.out.print("\n\t" + "\033[31m" + "RG inválido na linha " + line + "! Informe apenas números! Registro não importado!" + "\033[0m");                    
         }
         return rg;
     }
@@ -111,7 +111,7 @@ public class File_Importer {
             dataNascimento = LocalDate.parse(row[3], convertInputDate);
         }
         catch (DateTimeParseException e){
-            System.out.println("\033[31m" + "Data inválida na linha " + line + "! Informe em formato 'dd/mm/aaaa'! Registro não importado!" + "\033[0m");
+            System.out.print("\n\t" + "\033[31m" + "Data inválida na linha " + line + "! Informe em formato 'dd/mm/aaaa'! Registro não importado!" + "\033[0m");
         }
         return dataNascimento;
     }
