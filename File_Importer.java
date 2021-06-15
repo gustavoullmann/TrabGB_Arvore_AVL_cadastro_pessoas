@@ -44,7 +44,7 @@ public class File_Importer {
                         Nodo <Long> newNodeCpf = Main.CPF_TREE.insertNode(cpf, pessoa);
                         Main.CPF_TREE.checkTreeUnbalanceFromLeaf(newNodeCpf);
                         
-                        Nodo <String> newNodeNome = Main.NOME_TREE.insertNode(row[2], pessoa);
+                        Nodo <String> newNodeNome = Main.NOME_TREE.insertNode(row[2].toLowerCase(), pessoa);
                         Main.NOME_TREE.checkTreeUnbalanceFromLeaf(newNodeNome);
 
                         Nodo <LocalDate> newNodeData = Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
