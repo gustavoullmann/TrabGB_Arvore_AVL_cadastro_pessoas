@@ -233,7 +233,7 @@ public class Menu {
             dataNascimento = LocalDate.parse(inputDate, convertInputDate);
         }
         catch (DateTimeParseException e){
-            System.out.println("\033[31m" + "Data inválida! Informe em formato 'dd/mm/aaaa'!" + "\033[0m");
+            System.out.println("\n\t" + "\033[31m" + "Data inválida! Informe em formato 'dd/mm/aaaa'!" + "\033[0m");
             menu();
         }
         return dataNascimento;
