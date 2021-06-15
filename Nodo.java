@@ -2,7 +2,7 @@
 public class Nodo <T> {
 
     private T key;
-	private Person pessoa;
+	private Person pessoa;															//NOVO
     private Nodo <T> parent;
     private Nodo <T> rightSon;
     private Nodo <T> leftSon;
@@ -19,13 +19,13 @@ public class Nodo <T> {
         this.balanceFactor = 0;
     }
 
-    public Nodo() {       			    //construtor vazio para montar filhos vazios de nó folha; 
+    public Nodo() {
 		this.key = null;
 		this.pessoa = null;
         this.parent = null;
         this.rightSon = null;
         this.leftSon = null;
-        this.nodeHeight = -1;			//nodeHeight = -1 ao criar nó vazio, facilita a implementação do cálculo da altura do nó pai
+        this.nodeHeight = -1;			
         this.balanceFactor = 0;
 	}
 
@@ -37,11 +37,11 @@ public class Nodo <T> {
 		this.key = key;
 	}
 
-	public Person getPessoa() {
+	public Person getPessoa() {														//NOVO
 		return pessoa;
 	}
 
-	public void setPessoa(Person pessoa) {
+	public void setPessoa(Person pessoa) {											//NOVO
 		this.pessoa = pessoa;
 	}
 
@@ -85,7 +85,7 @@ public class Nodo <T> {
 		this.balanceFactor = balanceFactor;
 	}
 
-	public static <T> void calculateBalanceFactor(Nodo <T> node) {               
+	public static <T> void calculateBalanceFactor(Nodo <T> node) {
 
 		if(node.getKey() != null) {
 			int heightLeftSon = node.getLeftSon().getNodeHeight();
@@ -95,7 +95,7 @@ public class Nodo <T> {
 		}
 	}
 
-	public static <T> void calculateNodeHeight(Nodo <T> node) {					
+	public static <T> void calculateNodeHeight(Nodo <T> node) {
 
 		if(node.getKey() != null) {
 			int heightLeftSon = node.getLeftSon().getNodeHeight();
@@ -121,7 +121,7 @@ public class Nodo <T> {
 		return label;
 	}
 	
-	public String printNodeAttributes() {							//Não fizemos override de toString: gerava erro recursivo e "consumia" o método que imprime o endereço de memória do objeto
+	public String printNodeAttributes() {
 		return 	"\033[32m" +
 				"Key: " + key + "\n" +
 				"Pessoa: " + pessoa + "\n" +

@@ -1,5 +1,5 @@
 
-public class Tree <T extends Comparable<? super T>> {
+public class Tree <T extends Comparable<? super T>> {                                       //NOVO
 
     private Nodo <T> root;
 
@@ -251,7 +251,7 @@ public class Tree <T extends Comparable<? super T>> {
         return currentNode;        
     }
 
-    public void searchNodeByRangeDate(Nodo <T> rootNode, T minKey, T maxKey) {
+    public void searchNodeByRangeDate(Nodo <T> rootNode, T minKey, T maxKey) {              //NOVO
         Nodo <T> currentNode = rootNode;
         T currentNodeKey = currentNode.getKey();
 
@@ -505,7 +505,7 @@ public class Tree <T extends Comparable<? super T>> {
         }
     }
 
-    public void printInformationsInOrderTraversal(Nodo <T> node) {
+    public void printInformationsInOrderTraversal(Nodo <T> node) {                          //NOVO
 
         if(node.getKey() != null) {
             printInformationsInOrderTraversal(node.getLeftSon());

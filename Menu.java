@@ -29,7 +29,7 @@ public class Menu {
 
             switch(option.toLowerCase()) {
 
-                case "i":
+                case "i":                                                                           //NOVO
 
                     try {
                         System.out.print("\n\t" + "\033[31m" + "ATENÇÃO: esta função está configurada para trabalhar com arquivos '.CSV' cujo separador é ';'." + 
@@ -52,7 +52,7 @@ public class Menu {
                     }
                     break;
 
-                case "c": 
+                case "c":                                                                           //NOVO
                     if(Main.CPF_TREE.getRoot().getKey() == null) {
                         System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: não é possível buscar por CPF!" + "\033[0m");
                         menu();
@@ -81,7 +81,7 @@ public class Menu {
                     }
                     break;
 
-                case "n":
+                case "n":                                                                           //NOVO
 
                     if(Main.NOME_TREE.getRoot().getKey() == null) {
                         System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: não é possível buscar por nome!" + "\033[0m");
@@ -110,7 +110,7 @@ public class Menu {
                     }
                     break;
 
-                case "d":
+                case "d":                                                                           //NOVO
 
                     if(Main.DATANASC_TREE.getRoot().getKey() == null) {
                         System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: não é possível buscar por data de nascimento!" + "\033[0m");
@@ -154,7 +154,7 @@ public class Menu {
                     }
                     break;
 
-                case "p":
+                case "p":                                                                           //NOVO
 
                     System.out.println("\n" + "\033[1;33m" + "Escolha uma árvore para impressão:"  + "\n");
 
@@ -226,7 +226,7 @@ public class Menu {
         input.close();
     }
 
-    public static LocalDate readDataNasc(String inputDate) {
+    public static LocalDate readDataNasc(String inputDate) {                                        //NOVO
 
         LocalDate dataNascimento = null;
 
