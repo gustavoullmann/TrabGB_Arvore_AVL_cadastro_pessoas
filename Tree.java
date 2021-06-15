@@ -1,5 +1,5 @@
 
-public class Tree <T extends Comparable<? super T>> {                                       //NOVO
+public class Tree <T extends Comparable<? super T>> {                                       //NOVO; classe convertida para Generics, assim é possível instanciar árvores Integer (CPF), String (nome) e LocalDate(nascimento)
 
     private Nodo <T> root;
 
@@ -251,7 +251,7 @@ public class Tree <T extends Comparable<? super T>> {                           
         return currentNode;        
     }
 
-    public void searchNodeByRangeDate(Nodo <T> rootNode, T minKey, T maxKey) {              //NOVO
+    public void searchNodeByRangeDate(Nodo <T> rootNode, T minKey, T maxKey) {              //NOVO: faz a busca por intervalo de datas informado pelo usuário no padrão brasileiro.
         Nodo <T> currentNode = rootNode;
         T currentNodeKey = currentNode.getKey();
 
@@ -505,7 +505,7 @@ public class Tree <T extends Comparable<? super T>> {                           
         }
     }
 
-    public void printInformationsInOrderTraversal(Nodo <T> node) {                          //NOVO
+    public void printInformationsInOrderTraversal(Nodo <T> node) {                          //NOVO: é utilizadp para percorrer em ordem a árvore temporária que armazena as datas que estão dentro do intervalo informado pelo usuário. Assim se ordena as mesmas.
 
         if(node.getKey() != null) {
             printInformationsInOrderTraversal(node.getLeftSon());

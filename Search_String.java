@@ -1,9 +1,9 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Search_String {
+public class Search_String {                                                                        //NOVO: classe criada para lidar mais facilmente com métodos exclusivos de uma Tree<String>.
 
-    public static boolean matchesPattern(String sequence, String pieceOfString) {
+    public static boolean matchesPattern(String sequence, String pieceOfString) {                   //NOVO: verifica se uma sequência está no início de uma String, independente de ser maiúscula ou minúscula
 
         Pattern pattern = Pattern.compile("^" + sequence, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(pieceOfString);
@@ -12,7 +12,7 @@ public class Search_String {
         return matchFound;
     } 
 
-    public static Nodo<String> searchSubTreeRootNode(Tree<String> tree, String sequence) {
+    public static Nodo<String> searchSubTreeRootNode(Tree<String> tree, String sequence) {          //NOVO: localiza e retorna o primeiro nó que inicia com a chave especificada pelo usuário
 
         Nodo <String> currentNode = tree.getRoot(); 
         int sequenceLenght = sequence.length();
@@ -32,7 +32,7 @@ public class Search_String {
         return currentNode;
     }
 
-    public static void inOrderTraversal(Nodo <String> rootNode, String sequence) {
+    public static void inOrderTraversal(Nodo <String> rootNode, String sequence) {                  //NOVO: percorre a subárvore em ordem, fazendo a impressão das informações da pessoa de cada nó que retorna TRUE para o matchesPattern
 
         if(rootNode.getKey() != null) {
             inOrderTraversal(rootNode.getLeftSon(), sequence);

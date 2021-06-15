@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 public class File_Importer {
 
-    public static void CSV_reader(String filePath) {
+    public static void CSV_reader(String filePath) {                        //NOVO: importa o CSV informado pelo usuário. Válida cada registro e só importa dados válidos. Informa erros ao usuário
 
         String file = filePath;
         BufferedReader reader = null;
@@ -67,7 +67,7 @@ public class File_Importer {
         }
     }
 
-    public static boolean checkDuplicatedCpf(Long cpf) {
+    public static boolean checkDuplicatedCpf(Long cpf) {                    //NOVO: verifica se um CPF que está sendo importado já está cadastrado. Se estiver o mesmo não é importado. 
         
         boolean duplicatedCpf = false;
         Nodo <Long> node = Main.CPF_TREE.searchNode(cpf);
@@ -78,7 +78,7 @@ public class File_Importer {
         return duplicatedCpf;
     }
 
-    public static Long readCPF(String[] row, int line) {
+    public static Long readCPF(String[] row, int line) {                    //NOVO: faz a leitura e validação de números de CPF. 
 
         Long cpf = null;
         
@@ -90,7 +90,7 @@ public class File_Importer {
         return cpf;
     }
 
-    public static Integer readRG(String[] row, int line) {
+    public static Integer readRG(String[] row, int line) {                  //NOVO: faz a leitura e validação de números de RG.
 
         Integer rg = null;
 
@@ -102,7 +102,7 @@ public class File_Importer {
         return rg;
     }
 
-    public static LocalDate readDataNasc(String[] row, int line) {
+    public static LocalDate readDataNasc(String[] row, int line) {          //NOVO: faz a leitura e conversão de datas texto (dd/MM/yyyy) em datas LocalDate (yyyy/mm/dd).
 
         LocalDate dataNascimento = null;
 

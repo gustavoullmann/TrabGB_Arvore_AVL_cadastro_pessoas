@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Person {
+public class Person {                                               //NOVO: classe criada para instanciar e armazenar as informações do arquivo CSV
 
     private Long cpf;
     private Integer rg;

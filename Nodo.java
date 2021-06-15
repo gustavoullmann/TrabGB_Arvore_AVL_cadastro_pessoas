@@ -1,8 +1,8 @@
 
-public class Nodo <T> {
+public class Nodo <T> {																//NOVO; classe convertida para Generics, assim é possível instanciar nodos Integer (CPF), String (nome) e LocalDate(nascimento)
 
     private T key;
-	private Person pessoa;															//NOVO
+	private Person pessoa;															//NOVO: armazena um objeto pessoa em cada nó
     private Nodo <T> parent;
     private Nodo <T> rightSon;
     private Nodo <T> leftSon;
