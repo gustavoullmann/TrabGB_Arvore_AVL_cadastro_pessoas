@@ -91,10 +91,16 @@ public class Menu {
                         System.out.print("\n" + "\033[1;33m" + "Digite o nome, ou parte desse, que você quer buscar: " + "\033[0m");
 
                         try {
-                            String sequence = input.next();
+                            String sequence = input.next().toLowerCase();
 
-                            Nodo<String> returnedNode = Search_String.searchSubTreeRootNode(Main.NOME_TREE, sequence);
-                            Search_String.inOrderTraversal(returnedNode, sequence);
+                            Nodo<String> subTreeRootNode = Search_String.searchSubTreeRootNode(Main.NOME_TREE, sequence);
+
+                            if(subTreeRootNode.getKey() == null) {
+                                System.out.println("\n\t" + "\033[31m" + "Não foram encontrados resultados para os nomes pesquisados!" + "\033[0m");
+                            }
+                            else {
+                                Search_String.inOrderTraversal(subTreeRootNode, sequence);
+                            }
                             menu();
                         }
                         catch (Exception InputMismatchException) {
