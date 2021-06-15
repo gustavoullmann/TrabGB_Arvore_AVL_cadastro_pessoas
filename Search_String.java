@@ -10,17 +10,17 @@ public class Search_String {
         boolean matchFound = matcher.find();
 
         return matchFound;
-    }   
+    } 
 
     public static Nodo<String> searchSubTreeRootNode(Tree<String> tree, String sequence) {
 
         Nodo <String> currentNode = tree.getRoot(); 
-        String currentNodeKey = currentNode.getKey();
-        String trimSequence = sequence.substring(0, 1);
-       
-        while(currentNodeKey != null && matchesPattern(trimSequence, currentNodeKey) == false) {
+        int sequenceLenght = sequence.length();
+        String currentNodeKey = currentNode.getKey().substring(0, sequenceLenght);
 
-            if(trimSequence.compareTo(currentNodeKey) < 0) {
+        while(currentNodeKey != null && (currentNodeKey.startsWith(sequence) == false)) {
+
+            if(sequence.compareTo(currentNodeKey) < 0) {
                 currentNode = currentNode.getLeftSon();
                 currentNodeKey = currentNode.getKey();
             }
@@ -29,7 +29,7 @@ public class Search_String {
                 currentNodeKey = currentNode.getKey();
             }
         }
-        return currentNode;   
+        return currentNode;
     }
 
     public static void inOrderTraversal(Nodo <String> rootNode, String sequence) {
