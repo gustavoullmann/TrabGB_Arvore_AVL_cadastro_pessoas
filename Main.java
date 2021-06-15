@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 
 public class Main {
@@ -11,3 +12,9 @@ public class Main {
         Menu.menu();
     }
 }
+
+    // Autores:
+
+    // Gustavo Ullmann
+    // Igor Cassolli 
+    // Vinícius F. M. Flores
