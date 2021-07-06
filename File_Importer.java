@@ -28,6 +28,7 @@ public class File_Importer {
                 Long cpf = readCPF(row, currentLine);
                 Integer rg = readRG(row, currentLine);
                 LocalDate dataNasc = readDataNasc(row, currentLine);
+                Long dataCpf = concatDateAndCpf(dataNasc, cpf);
 
                 if(cpf == null || rg == null || dataNasc == null) {
                     totalImported--;
@@ -47,8 +48,11 @@ public class File_Importer {
                         Nodo <String> newNodeNome = Main.NOME_TREE.insertNode(row[2].toLowerCase(), pessoa);
                         Main.NOME_TREE.checkTreeUnbalanceFromLeaf(newNodeNome);
 
-                        Nodo <LocalDate> newNodeData = Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
-                        Main.DATANASC_TREE.checkTreeUnbalanceFromLeaf(newNodeData);
+                        // Nodo <LocalDate> newNodeData = Main.DATANASC_TREE.insertNode(dataNasc, pessoa);
+                        // Main.DATANASC_TREE.checkTreeUnbalanceFromLeaf(newNodeData);
+
+                        Nodo <Long> newNodeDataCpf = Main.DATACPF_TREE.insertNode(dataCpf, pessoa);
+                        Main.DATACPF_TREE.checkTreeUnbalanceFromLeaf(newNodeDataCpf);
                     }
                 }   
             }
@@ -114,5 +118,29 @@ public class File_Importer {
             System.out.print("\n\t" + "\033[31m" + "Data inválida na linha " + line + "! Informe em formato 'dd/mm/aaaa'! Registro não importado!" + "\033[0m");
         }
         return dataNascimento;
+    }
+
+    public static Long concatDateAndCpf(LocalDate dataNasc, Long cpf) {
+
+        Long dataCpf = null;
+
+        String dataNascString = convertDataToString(dataNasc);
+        String cpfString = Long.toString(cpf);
+
+        String dataCpfString = dataNascString + cpfString;
+
+        dataCpf = Long.parseLong(dataCpfString);
+
+        return dataCpf;
+    }
+
+    public static String convertDataToString(LocalDate dataNasc) {          //NOVO: faz a leitura, elimina as barras e converte a data para long
+
+        String dataString = null;
+
+        DateTimeFormatter convertInputDate = DateTimeFormatter.ofPattern("yyyyMMdd");
+        dataString = dataNasc.format(convertInputDate);
+
+        return dataString;
     }
 } 

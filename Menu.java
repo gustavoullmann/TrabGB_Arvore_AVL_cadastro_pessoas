@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.format.DateTimeParseException;
 
@@ -112,7 +113,8 @@ public class Menu {
 
                 case "d":                                                                           //NOVO
 
-                    if(Main.DATANASC_TREE.getRoot().getKey() == null) {
+                    // if(Main.DATANASC_TREE.getRoot().getKey() == null) {
+                    if(Main.DATACPF_TREE.getRoot().getKey() == null) {
                         System.out.println("\n\t" + "\033[31m" + "ATENÇÃO: não é possível buscar por data de nascimento!" + "\033[0m");         //caso o usuário tente efetuar busca sem carregar um CSV
                         menu();
                     }
@@ -136,17 +138,8 @@ public class Menu {
                             menu();
                         } 
                         else {
-                            Nodo<LocalDate> rootNode = Main.DATANASC_TREE.getRoot();
-                            Tree<LocalDate> searchByRangeResultTree = new Tree<LocalDate>();                                                    //Árvore temporária para receber os nós dentro do intervalo pesquisado
-                            searchByRangeResultTree.searchNodeByRangeDate(rootNode, minDate, maxDate);                                          //insere ná árvore temporária os nós dentro do intervalos de datas 
-                            Nodo<LocalDate> rootNodeResultTree = searchByRangeResultTree.getRoot();                                             //retorna o root da árvore temporária
-    
-                            if(rootNodeResultTree.getKey() == null) {
-                                System.out.println("\n\t" + "\033[31m" + "Não foram encontrados resultados para as datas pesquisadas!" + "\033[0m");
-                            }
-                            else {
-                                searchByRangeResultTree.printInformationsInOrderTraversal(rootNodeResultTree);                                  //percorre a árvore temporária em ordem, fazendo a impressão cronológica das informações 
-                            }
+                            Nodo<Long> rootNode = Main.DATACPF_TREE.getRoot();
+                            Main.DATACPF_TREE.searchNodeByRangeDateCpf(rootNode, minDate, maxDate);
                             menu();
                         }
                     }
@@ -184,8 +177,11 @@ public class Menu {
                                 break;
 
                             case "d":
-                                Tree treeDate = Main.DATANASC_TREE;
-                                Nodo rootNodeDate = Main.DATANASC_TREE.getRoot();
+                                // Tree treeDate = Main.DATANASC_TREE;
+                                // Nodo rootNodeDate = Main.DATANASC_TREE.getRoot();
+
+                                Tree treeDate = Main.DATACPF_TREE;
+                                Nodo rootNodeDate = Main.DATACPF_TREE.getRoot();
 
                                 System.out.println("\n" + "\033[1;33m" + "Imprimir a árvore de Datas de Nascimento em múltiplos percursos: " + "\033[0m" + "\n");
                                 printer(rootNodeDate, treeDate);

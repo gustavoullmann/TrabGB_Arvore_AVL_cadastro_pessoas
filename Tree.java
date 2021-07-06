@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Tree <T extends Comparable<? super T>> {                                       //NOVO; classe convertida para Generics, assim é possível instanciar árvores Integer (CPF), String (nome) e LocalDate(nascimento)
 
@@ -269,6 +271,43 @@ public class Tree <T extends Comparable<? super T>> {                           
 
             searchNodeByRangeDate(currentNode.getLeftSon(), minKey, currentNodeKey);
             searchNodeByRangeDate(currentNode.getRightSon(), currentNodeKey, maxKey);
+        }
+    }
+
+    public void searchNodeByRangeDateCpf(Nodo <T> rootNode, LocalDate minKey, LocalDate maxKey) {
+
+        ArrayList<Person> personArray = new ArrayList<>();
+
+        inOrderTraversalDateCpfCheck(rootNode, personArray, minKey, maxKey);
+
+        if(personArray.isEmpty()) {
+            System.out.println("\n\t" + "\033[31m" + "Não foram encontrados resultados para as datas pesquisadas!" + "\033[0m");
+        }
+        else {
+            for(int i = 0; i < personArray.size(); i++) {
+
+                Person p = personArray.get(i);
+    
+                if(p.getDataNascimento().compareTo(minKey) >= 0 && p.getDataNascimento().compareTo(maxKey) <= 0) {
+                    System.out.println();
+                    p.printInformations();
+                }
+            }
+        }
+    }
+
+    public void inOrderTraversalDateCpfCheck(Nodo <T> node, ArrayList<Person> arrayList, LocalDate minKey, LocalDate maxKey) {
+
+        if(node.getKey() != null) {
+            inOrderTraversalDateCpfCheck(node.getLeftSon(), arrayList, minKey, maxKey);
+
+            LocalDate dataNasc = node.getPessoa().getDataNascimento();
+
+            if(dataNasc.compareTo(minKey) >= 0 && dataNasc.compareTo(maxKey) <= 0) {
+                arrayList.add(node.getPessoa());
+            }
+
+            inOrderTraversalDateCpfCheck(node.getRightSon(), arrayList, minKey, maxKey);
         }
     }
 
